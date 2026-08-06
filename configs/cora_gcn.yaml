@@ -1,0 +1,31 @@
+# Cora node classification with adaptive edge retirement
+dataset: Cora
+dataset_root: ./data
+model: gcn
+hidden_channels: 64
+num_layers: 2
+dropout: 0.5
+
+lr: 0.01
+weight_decay: 5e-4
+epochs: 300
+device: cpu
+
+scheduler: adaptive
+epsilon_max: 1.0e-2
+epsilon_min: 1.0e-4
+anneal_steps: 200
+anneal_schedule: cosine
+warmup_steps: 50
+max_retire_frac: 0.05
+max_sparsity: 0.90
+retire_every: 5
+
+influence_method: gradient
+ema_decay: 0.9
+
+log_every: 10
+save_dir: ./results
+run_name: cora_gcn_adaptive
+
+seed: 42
