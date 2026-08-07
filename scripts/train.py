@@ -87,8 +87,12 @@ def train(cfg: Config) -> dict:
     # ----------------------------------------------------------------
     tg = TemporalGraph(data.edge_index, data.num_nodes, device=device)
     edge_manager = EdgeManager(data.edge_index, data.num_nodes)
-    influence_est = GradientNormEstimator(m0, device)
-    influence_est._ema_decay = cfg.ema_decay
+    influence_est = GradientNormEstimator(
+        m0, device,
+        edge_index=data.edge_index,
+        num_nodes=data.num_nodes,
+        ema_decay=cfg.ema_decay,
+    )
 
     # ----------------------------------------------------------------
     # 3. Model

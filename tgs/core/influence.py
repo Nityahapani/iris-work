@@ -36,84 +36,178 @@ logger = logging.getLogger(__name__)
 
 class GradientNormEstimator:
     """
-    Approximates edge influence via gradient norm of the loss w.r.t. edge weights.
+    Approximates edge influence via a composite score combining:
 
-        Î_e(t) = |∂L/∂w_e|
+      1. Gradient signal   — |∂L/∂w_e|  (how much edge affects current loss)
+      2. Structural score  — degree-weighted bridge importance (protects hub edges)
+      3. Representation maturity — variance of gradient over recent steps
+                                   (stable = mature = safe to retire)
 
-    This is computed for free after the backward pass: edge weights w_e are
-    treated as leaf parameters. The gradient ∂L/∂w_e reflects how much the
-    loss changes per unit change in that edge's contribution — a direct proxy
-    for how much information the edge is still contributing to training.
+    This implements the three-score system described in the project brief,
+    grounded in Theorem 7.4: optimal retirement when Be(t) = λ.
 
-    Connection to theory:
-        From Theorem 7.4, the optimal retirement condition is Be(t) = λ, where
-        Be(t) = L(Yhat^(E_t minus e), Y*) - L(Yhat^(E_t), Y*) approx -dL/dw_e * Delta_w_e.
-        Thus |∂L/∂w_e| = 0 signals Be(t) = 0, i.e., the edge contributes
-        nothing to the loss — a natural retirement signal.
+    Final composite score (lower = safer to retire):
+        S_e(t) = α * grad_ema  +  β * structural  +  γ * maturity
 
     Args:
-        num_edges: m0, total initial edges
-        device: torch device
+        num_edges:        m0, total initial edges
+        device:           torch device
+        edge_index:       [2, m0] — used to compute structural scores
+        num_nodes:        n — for degree computation
+        alpha:            weight for gradient signal  (default 0.5)
+        beta:             weight for structural score (default 0.3)
+        gamma:            weight for maturity signal  (default 0.2)
+        ema_decay:        EMA smoothing for gradient signal
+        maturity_window:  steps over which to measure gradient variance
     """
 
-    def __init__(self, num_edges: int, device: torch.device):
+    def __init__(
+        self,
+        num_edges: int,
+        device: torch.device,
+        edge_index: Optional[Tensor] = None,
+        num_nodes: int = 0,
+        alpha: float = 0.5,
+        beta: float = 0.3,
+        gamma: float = 0.2,
+        ema_decay: float = 0.9,
+        maturity_window: int = 20,
+    ):
         self.num_edges = num_edges
         self.device = device
+        self.alpha = alpha
+        self.beta = beta
+        self.gamma = gamma
+        self._ema_decay = ema_decay
+        self.maturity_window = maturity_window
 
-        # Learnable edge weights initialized to 1 (unweighted graph)
-        # These are differentiable, so ∂L/∂w_e is available after backward()
+        # Differentiable edge weights
         self.edge_weights = nn.Parameter(
             torch.ones(num_edges, device=device), requires_grad=True
         )
 
-        # EMA of gradient norms for smoothing (reduces noise)
+        # Score components
         self._ema_influence: Tensor = torch.zeros(num_edges, device=device)
-        self._ema_decay: float = 0.9
+        self._structural_score: Tensor = torch.zeros(num_edges, device=device)
+        self._grad_history: list[Tensor] = []   # rolling window for maturity
+        self._maturity_score: Tensor = torch.zeros(num_edges, device=device)
 
-        logger.debug(f"GradientNormEstimator: tracking {num_edges} edges")
+        # Precompute structural scores if edge_index provided
+        if edge_index is not None and num_nodes > 0:
+            self._compute_structural_scores(edge_index, num_nodes)
 
-    def active_weights(self, active_mask: Tensor) -> Tensor:
+        logger.debug(f"GradientNormEstimator (composite): tracking {num_edges} edges | α={alpha} β={beta} γ={gamma}")
+
+    def _compute_structural_scores(self, edge_index: Tensor, num_nodes: int) -> None:
         """
-        Return edge weights for the currently active edges.
-        The model uses these weights in message passing — masked to active edges.
+        Structural importance: normalised endpoint degree sum.
+        High-degree edges (hubs) get a HIGH score → harder to retire.
+        This protects bridge edges that maintain global connectivity.
+        Scores are normalised to [0, 1].
         """
-        return self.edge_weights[active_mask]
+        from torch_geometric.utils import degree
+        src, dst = edge_index[0], edge_index[1]
+        deg = degree(dst, num_nodes, dtype=torch.float).to(self.device)
+
+        # Score = (deg[u] + deg[v]) / max_possible — higher means more important
+        raw = (deg[src] + deg[dst])
+        max_deg = raw.max().clamp(min=1.0)
+        self._structural_score = (raw / max_deg).to(self.device)
+        logger.debug(f"Structural scores: mean={self._structural_score.mean():.3f} std={self._structural_score.std():.3f}")
 
     def update_influence(self, active_mask: Tensor) -> None:
         """
-        After backward(), read ∂L/∂w_e for active edges and update EMA.
-        Call this after loss.backward() and before optimizer.step().
+        After backward(): update all three score components.
+        Call after loss.backward(), before optimizer.step().
         """
         if self.edge_weights.grad is None:
-            logger.warning("update_influence called but edge_weights.grad is None — skipping")
+            logger.warning("update_influence: grad is None — skipping")
             return
 
-        grad = self.edge_weights.grad.detach().abs()  # |∂L/∂w_e|, shape [m0]
+        grad = self.edge_weights.grad.detach().abs()  # [m0]
 
-        # EMA update: only update active edges
+        # 1. Gradient EMA
         self._ema_influence[active_mask] = (
             self._ema_decay * self._ema_influence[active_mask]
             + (1 - self._ema_decay) * grad[active_mask]
         )
 
-        # Zero grad for next step
+        # 2. Maturity: low variance in recent gradients = stable = mature = safe
+        self._grad_history.append(grad.clone())
+        if len(self._grad_history) > self.maturity_window:
+            self._grad_history.pop(0)
+
+        if len(self._grad_history) >= 5:
+            stacked = torch.stack(self._grad_history, dim=0)  # [W, m0]
+            grad_var = stacked.var(dim=0)                     # [m0]
+            # Normalise to [0,1]; low var (mature) → low maturity score
+            max_var = grad_var.max().clamp(min=1e-10)
+            self._maturity_score = (grad_var / max_var)
+
         self.edge_weights.grad.zero_()
 
     def influence_scores(self, active_mask: Tensor) -> Tensor:
         """
-        Return smoothed influence score Î_e(t) for active edges.
-        Lower score = safer to retire.
+        Composite influence score S_e(t) for active edges.
+        Lower = safer to retire.
 
-        Returns:
-            Tensor of shape [m0]; inactive edges have score 0.
+        Strategy:
+          - Structural score acts as a HARD GATE: edges in the top-k% by
+            degree sum are never retired (score set to infinity).
+          - For remaining edges, score = α * grad_ema + γ * maturity.
+          - This avoids the normalisation conflict where structural weight
+            inadvertently penalises low-degree edges that should be retired.
+
+        Hub protection threshold: top 15% of edges by degree sum are locked.
         """
-        scores = self._ema_influence.clone()
-        scores[~active_mask] = 0.0  # inactive edges irrelevant
+        scores = torch.full((self.num_edges,), float("inf"), device=self.device)
+
+        if not active_mask.any():
+            return scores
+
+        # --- Hard gate: lock top-15% highest-degree active edges ---
+        active_struct = self._structural_score.clone()
+        active_struct[~active_mask] = -1.0  # exclude inactive
+
+        n_active = active_mask.sum().item()
+        n_locked = max(1, int(n_active * 0.15))
+        _, top_idx = active_struct.topk(n_locked)
+        locked_mask = torch.zeros(self.num_edges, dtype=torch.bool, device=self.device)
+        locked_mask[top_idx] = True
+
+        # Eligible = active AND not locked
+        eligible_mask = active_mask & ~locked_mask
+
+        if not eligible_mask.any():
+            return scores
+
+        # --- Soft score for eligible edges ---
+        def _norm(t: Tensor, mask: Tensor) -> Tensor:
+            vals = t[mask]
+            mn, mx = vals.min(), vals.max()
+            if (mx - mn) < 1e-12:
+                out = torch.zeros(self.num_edges, device=self.device)
+                out[mask] = 0.0
+                return out
+            out = torch.zeros(self.num_edges, device=self.device)
+            out[mask] = (vals - mn) / (mx - mn)
+            return out
+
+        grad_norm     = _norm(self._ema_influence, eligible_mask)
+        maturity_norm = _norm(self._maturity_score, eligible_mask)
+
+        composite = self.alpha * grad_norm + self.gamma * maturity_norm
+        scores[eligible_mask] = composite[eligible_mask]
+
+        # Inactive edges: score = 0 (already retired, irrelevant)
+        scores[~active_mask] = 0.0
+
         return scores
 
     def reset(self) -> None:
-        """Reset EMA — call if starting a fresh training run."""
         self._ema_influence.zero_()
+        self._maturity_score.zero_()
+        self._grad_history.clear()
         if self.edge_weights.grad is not None:
             self.edge_weights.grad.zero_()
 

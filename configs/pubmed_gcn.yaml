@@ -1,5 +1,4 @@
-# Cora node classification with adaptive edge retirement
-dataset: Cora
+dataset: PubMed
 dataset_root: ./data
 model: gcn
 hidden_channels: 64
@@ -26,6 +25,6 @@ ema_decay: 0.9
 
 log_every: 10
 save_dir: ./results
-run_name: cora_gcn_adaptive
+run_name: pubmed_gcn_adaptive
 
 seed: 42
