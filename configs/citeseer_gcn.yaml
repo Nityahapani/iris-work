@@ -11,13 +11,13 @@ epochs: 300
 device: cpu
 
 scheduler: adaptive
-epsilon_max: 1.0e-2
-epsilon_min: 1.0e-4
-anneal_steps: 200
+epsilon_max: 5.0e-3
+epsilon_min: 1.0e-5
+anneal_steps: 100
 anneal_schedule: cosine
-warmup_steps: 50
-max_retire_frac: 0.05
-max_sparsity: 0.90
+warmup_steps: 40
+max_retire_frac: 0.02
+max_sparsity: 0.50
 retire_every: 5
 
 influence_method: gradient

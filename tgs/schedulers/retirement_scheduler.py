@@ -64,6 +64,13 @@ class RetirementScheduler:
         # History for logging
         self._retirement_log: list[dict] = []
 
+        # Val accuracy guard: stop retiring if accuracy drops
+        self._val_acc_history: list[float] = []
+        self._best_val_acc: float = 0.0
+        self._val_acc_guard_triggered: bool = False
+        self._val_patience_delta: float = 0.04  # allow 4% drop below peak before halting
+        self._val_guard_window: int = 15         # smooth over last 15 steps before checking
+
     # ------------------------------------------------------------------
     # Main interface
     # ------------------------------------------------------------------
@@ -92,6 +99,10 @@ class RetirementScheduler:
         # 3. Sparsity ceiling check
         if self.tg.sparsity >= self.max_sparsity:
             logger.debug(f"Step {t}: sparsity ceiling {self.max_sparsity:.2f} reached, skipping")
+            return 0
+
+        # 3b. Accuracy guard: halt retirement if val acc dropped > patience_delta
+        if self._val_acc_guard_triggered:
             return 0
 
         # 4. Find eligible edges: active AND influence below threshold
@@ -136,6 +147,35 @@ class RetirementScheduler:
     # ------------------------------------------------------------------
     # Diagnostics
     # ------------------------------------------------------------------
+
+    def update_val_acc(self, val_acc: float) -> None:
+        """
+        Inform the scheduler of current validation accuracy.
+        Guard only activates after warmup. Uses a rolling window average
+        to avoid reacting to single noisy epochs.
+        """
+        self._val_acc_history.append(val_acc)
+
+        # Don't trigger guard before warmup is done
+        if self.tg.t < self.warmup_steps + self._val_guard_window:
+            if val_acc > self._best_val_acc:
+                self._best_val_acc = val_acc
+            return
+
+        # Smoothed current acc over last window steps
+        window = self._val_acc_history[-self._val_guard_window:]
+        smoothed = sum(window) / len(window)
+
+        if smoothed > self._best_val_acc:
+            self._best_val_acc = smoothed
+
+        if self._best_val_acc - smoothed > self._val_patience_delta:
+            if not self._val_acc_guard_triggered:
+                logger.info(
+                    f"Val acc guard triggered at step {self.tg.t}: "
+                    f"best={self._best_val_acc:.4f}, smoothed={smoothed:.4f} — halting retirement"
+                )
+            self._val_acc_guard_triggered = True
 
     @property
     def cumulative_distortion_bound(self) -> float:

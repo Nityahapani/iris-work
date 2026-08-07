@@ -7,10 +7,10 @@ Theory context (Definition 4.2):
 Exact computation requires two forward passes per edge — O(m) passes total,
 which is intractable. We approximate using the first-order Taylor expansion:
 
-    H_t^{-e} ≈ H_t + (∂H_t/∂A_t) · (-Δ_e)
+    H_t^(-e) approx H_t + (dH_t/dA_t) * (-Delta_e)
 
 So:
-    Ie(t) ≈ ‖(∂H_t/∂A_t) · Δ_e‖_F
+    Ie(t) approx norm((dH_t/dA_t) * Delta_e, 'fro')
 
 In practice, we use the gradient of the loss w.r.t. each edge weight as a
 proxy: a high-gradient edge contributes more to the current optimization
@@ -47,7 +47,7 @@ class GradientNormEstimator:
 
     Connection to theory:
         From Theorem 7.4, the optimal retirement condition is Be(t) = λ, where
-        Be(t) = L(Ŷ^{E_t\{e}}, Y*) - L(Ŷ^{E_t}, Y*) ≈ -∂L/∂w_e · Δw_e.
+        Be(t) = L(Yhat^(E_t minus e), Y*) - L(Yhat^(E_t), Y*) approx -dL/dw_e * Delta_w_e.
         Thus |∂L/∂w_e| = 0 signals Be(t) = 0, i.e., the edge contributes
         nothing to the loss — a natural retirement signal.
 
