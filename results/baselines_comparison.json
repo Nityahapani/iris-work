@@ -1,0 +1,112 @@
+[
+  {
+    "method": "TGS (ours)",
+    "dataset": "Cora",
+    "best_val_acc": 0.776,
+    "best_test_acc": 0.801,
+    "final_sparsity": 0.26079954528230387,
+    "flops_reduction": 0.19722748515851962,
+    "distortion_bound": 0.027530000000000002,
+    "edges_retired": 2753,
+    "m0": 10556
+  },
+  {
+    "baseline": "dense",
+    "target_sparsity": 0.0,
+    "actual_sparsity": 0.0,
+    "best_val_acc": 0.800000011920929,
+    "best_test_acc": 0.8100000023841858,
+    "m0": 10556,
+    "mt": 10556,
+    "dataset": "Cora",
+    "method": "Dense GCN"
+  },
+  {
+    "baseline": "random",
+    "target_sparsity": 0.1,
+    "actual_sparsity": 0.10003789314134137,
+    "best_val_acc": 0.800000011920929,
+    "best_test_acc": 0.8050000071525574,
+    "m0": 10556,
+    "mt": 9500,
+    "dataset": "Cora",
+    "method": "Random"
+  },
+  {
+    "baseline": "local_degree",
+    "target_sparsity": 0.1,
+    "actual_sparsity": 0.09994316028798789,
+    "best_val_acc": 0.7839999794960022,
+    "best_test_acc": 0.8029999732971191,
+    "m0": 10556,
+    "mt": 9501,
+    "dataset": "Cora",
+    "method": "Local Degree"
+  },
+  {
+    "baseline": "eff_resistance",
+    "target_sparsity": 0.1,
+    "actual_sparsity": 0.10003789314134137,
+    "best_val_acc": 0.8100000023841858,
+    "best_test_acc": 0.8199999928474426,
+    "m0": 10556,
+    "mt": 9500,
+    "dataset": "Cora",
+    "method": "Eff. Resistance"
+  },
+  {
+    "method": "TGS (ours)",
+    "dataset": "CiteSeer",
+    "best_val_acc": 0.66,
+    "best_test_acc": 0.655,
+    "final_sparsity": 0.1137961335676626,
+    "flops_reduction": 0.09399714411247806,
+    "distortion_bound": 0.010360000000000001,
+    "edges_retired": 1036,
+    "m0": 9104
+  },
+  {
+    "baseline": "dense",
+    "target_sparsity": 0.0,
+    "actual_sparsity": 0.0,
+    "best_val_acc": 0.7260000109672546,
+    "best_test_acc": 0.7170000076293945,
+    "m0": 9104,
+    "mt": 9104,
+    "dataset": "CiteSeer",
+    "method": "Dense GCN"
+  },
+  {
+    "baseline": "random",
+    "target_sparsity": 0.1,
+    "actual_sparsity": 0.1000659050966608,
+    "best_val_acc": 0.7239999771118164,
+    "best_test_acc": 0.7059999704360962,
+    "m0": 9104,
+    "mt": 8193,
+    "dataset": "CiteSeer",
+    "method": "Random"
+  },
+  {
+    "baseline": "local_degree",
+    "target_sparsity": 0.1,
+    "actual_sparsity": 0.09995606326889284,
+    "best_val_acc": 0.7160000205039978,
+    "best_test_acc": 0.7149999737739563,
+    "m0": 9104,
+    "mt": 8194,
+    "dataset": "CiteSeer",
+    "method": "Local Degree"
+  },
+  {
+    "baseline": "eff_resistance",
+    "target_sparsity": 0.1,
+    "actual_sparsity": 0.1000659050966608,
+    "best_val_acc": 0.7360000014305115,
+    "best_test_acc": 0.7179999947547913,
+    "m0": 9104,
+    "mt": 8193,
+    "dataset": "CiteSeer",
+    "method": "Eff. Resistance"
+  }
+]

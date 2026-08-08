@@ -7,7 +7,6 @@ dist/
 build/
 .eggs/
 data/
-results/
 *.log
 .DS_Store
 .env

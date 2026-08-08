@@ -1,0 +1,32 @@
+{
+  "A1_schedule": {
+    "cosine": {"test": 0.801, "sp": 0.612, "flops_red": 0.517},
+    "linear": {"test": 0.801, "sp": 0.569, "flops_red": 0.482},
+    "step":   {"test": 0.801, "sp": 0.569, "flops_red": 0.482}
+  },
+  "A2_warmup": {
+    "20":  {"test": 0.768, "sp": 0.651, "flops_red": 0.592},
+    "40":  {"test": 0.801, "sp": 0.612, "flops_red": 0.517},
+    "60":  {"test": 0.801, "sp": 0.569, "flops_red": 0.444},
+    "80":  {"test": 0.801, "sp": 0.569, "flops_red": 0.406}
+  },
+  "A3_frequency": {
+    "1":  {"test": 0.801, "sp": 0.651, "flops_red": 0.556},
+    "2":  {"test": 0.801, "sp": 0.612, "flops_red": 0.517},
+    "5":  {"test": 0.801, "sp": 0.468, "flops_red": 0.389},
+    "10": {"test": 0.801, "sp": 0.409, "flops_red": 0.330},
+    "20": {"test": 0.801, "sp": 0.271, "flops_red": 0.218}
+  },
+  "A4_max_sparsity": {
+    "0.30": {"test": 0.801, "sp": 0.344, "flops_red": 0.295},
+    "0.40": {"test": 0.801, "sp": 0.409, "flops_red": 0.350},
+    "0.50": {"test": 0.801, "sp": 0.522, "flops_red": 0.443},
+    "0.65": {"test": 0.801, "sp": 0.612, "flops_red": 0.517},
+    "0.75": {"test": 0.801, "sp": 0.612, "flops_red": 0.517}
+  },
+  "estimator_comparison": {
+    "40":  {"grad_r": -0.135, "grad_agr": 0.600, "sens_r": 0.199, "sens_agr": 0.233},
+    "80":  {"grad_r": -0.023, "grad_agr": 0.767, "sens_r": 0.165, "sens_agr": 0.300},
+    "150": {"grad_r": 0.064,  "grad_agr": 0.633, "sens_r": 0.194, "sens_agr": 0.300}
+  }
+}
