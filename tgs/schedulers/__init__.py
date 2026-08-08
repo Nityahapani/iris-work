@@ -1,2 +1,3 @@
 from .retirement_scheduler import RetirementScheduler
 from .adaptive_scheduler import AdaptiveRetirementScheduler
+from .improved_scheduler import ImprovedRetirementScheduler
