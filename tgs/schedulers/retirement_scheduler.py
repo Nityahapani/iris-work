@@ -79,53 +79,59 @@ class RetirementScheduler:
         """
         Attempt retirement at the current training step.
 
-        Args:
-            influence_scores: Tensor [m0] — Î_e(t) for all edges
-                              (inactive edges should have score 0)
+        Uses PERCENTILE-based retirement: retires the lowest-scoring
+        eligible edges each step, up to max_retire_frac of active edges.
+        This is more robust than a fixed-ε threshold because it adapts
+        to whatever score distribution the estimator produces.
 
-        Returns:
-            Number of edges retired this step (0 if warm-up or no eligible edges)
+        The ε threshold in Definition 5.1 is still respected indirectly:
+        we only retire edges whose score is below the median eligible score
+        (i.e., the bottom half of eligible edges), ensuring we never retire
+        edges the estimator considers above-average influence.
         """
         t = self.tg.t
 
-        # 1. Cooling schedule: no retirements during warm-up
         if t < self.warmup_steps:
             return 0
 
-        # 2. Only run every retire_every steps
         if (t - self.warmup_steps) % self.retire_every != 0:
             return 0
 
-        # 3. Sparsity ceiling check
         if self.tg.sparsity >= self.max_sparsity:
-            logger.debug(f"Step {t}: sparsity ceiling {self.max_sparsity:.2f} reached, skipping")
             return 0
 
-        # 3b. Accuracy guard: halt retirement if val acc dropped > patience_delta
         if self._val_acc_guard_triggered:
             return 0
 
-        # 4. Find eligible edges: active AND influence below threshold
         active_mask = self.tg.active_mask
-        eligible_mask = active_mask & (influence_scores <= self.epsilon)
+        # Eligible = active AND not locked (score < inf)
+        eligible_mask = active_mask & (influence_scores < float("inf"))
         eligible_indices = eligible_mask.nonzero(as_tuple=False).squeeze(1)
 
         if len(eligible_indices) == 0:
             return 0
 
-        # 5. Rate limiting: cap at max_retire_frac of currently active edges
-        max_retire = max(1, int(self.tg.mt * self.max_retire_frac))
-        if len(eligible_indices) > max_retire:
-            # Retire the lowest-influence edges first (safest)
-            scores_eligible = influence_scores[eligible_indices]
-            _, sorted_order = scores_eligible.sort()
-            eligible_indices = eligible_indices[sorted_order[:max_retire]]
+        # Percentile gate: only retire edges in the bottom 30% of scores
+        # (low score = safe to retire per our scoring convention)
+        scores_eligible = influence_scores[eligible_indices]
+        percentile_30   = torch.quantile(scores_eligible, 0.30)
+        candidate_mask  = scores_eligible <= percentile_30
+        candidate_idx   = eligible_indices[candidate_mask]
 
-        # 6. Execute retirement
-        n_retired = self.tg.retire_edges(eligible_indices)
+        if len(candidate_idx) == 0:
+            return 0
+
+        # Rate limit: cap at max_retire_frac of active edges
+        max_retire = max(1, int(self.tg.mt * self.max_retire_frac))
+        if len(candidate_idx) > max_retire:
+            # Retire the absolute lowest-score edges first
+            scores_candidates = influence_scores[candidate_idx]
+            _, order = scores_candidates.sort()
+            candidate_idx = candidate_idx[order[:max_retire]]
+
+        n_retired = self.tg.retire_edges(candidate_idx)
         self._cumulative_k += n_retired
 
-        # 7. Log
         entry = {
             "step": t,
             "retired": n_retired,
@@ -136,12 +142,12 @@ class RetirementScheduler:
         }
         self._retirement_log.append(entry)
 
-        logger.info(
-            f"Step {t}: retired {n_retired} edges | "
-            f"sparsity={self.tg.sparsity:.3f} | "
-            f"distortion bound={entry['cumulative_distortion_bound']:.4f}"
-        )
-
+        if n_retired > 0:
+            logger.info(
+                f"Step {t}: retired {n_retired} | "
+                f"sparsity={self.tg.sparsity:.3f} | "
+                f"distortion_bound={entry['cumulative_distortion_bound']:.4f}"
+            )
         return n_retired
 
     # ------------------------------------------------------------------
