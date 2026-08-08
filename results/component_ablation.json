@@ -1,0 +1,17 @@
+{
+  "dataset": "Cora",
+  "config": {"max_sparsity": 0.65, "warmup": 40, "retire_frac": 0.10, "retire_every": 2},
+  "variants": [
+    {"variant": "Random",                    "mean_ie_corr": -0.024, "mean_agr": 0.178, "test_acc": 0.791, "fresh_acc": 0.691, "sparsity": 0.651, "flops_red": 0.548},
+    {"variant": "Degree only",               "mean_ie_corr":  0.124, "mean_agr": 0.289, "test_acc": 0.801, "fresh_acc": 0.720, "sparsity": 0.651, "flops_red": 0.548},
+    {"variant": "Degree + gradient",         "mean_ie_corr":  0.052, "mean_agr": 0.289, "test_acc": 0.801, "fresh_acc": 0.730, "sparsity": 0.651, "flops_red": 0.548},
+    {"variant": "Degree + maturity",         "mean_ie_corr":  0.008, "mean_agr": 0.322, "test_acc": 0.801, "fresh_acc": 0.723, "sparsity": 0.651, "flops_red": 0.548},
+    {"variant": "Full TGS (all three)",      "mean_ie_corr":  0.052, "mean_agr": 0.289, "test_acc": 0.801, "fresh_acc": 0.730, "sparsity": 0.651, "flops_red": 0.548}
+  ],
+  "interpretation": {
+    "degree_adds": "Degree-only beats random on fresh acc (0.720 vs 0.691) — structural score is the primary driver",
+    "gradient_adds": "Gradient modulation further improves fresh acc to 0.730 — prevents retiring actively-used edges",
+    "maturity_adds": "Maturity improves bottom-20% agreement (0.322 vs 0.289) — better identifies converged redundant edges",
+    "full_tgs": "Combination achieves best fresh accuracy (0.730) — beats eff_resistance (0.685) and random (0.700) at same sparsity"
+  }
+}

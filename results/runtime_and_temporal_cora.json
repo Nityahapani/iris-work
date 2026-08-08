@@ -1,0 +1,49 @@
+{
+  "results": [
+    {
+      "label": "Dense GCN",
+      "test_acc": 0.8100000023841858,
+      "sparsity": 0.0,
+      "total_s": 9.390207318999956,
+      "ep_mean_ms": 31.300691063333183,
+      "ep_std_ms": 1.8241805723690971,
+      "peak_mb": 1.027383,
+      "flops_red": 0.0,
+      "total_flops": 810700800,
+      "inf_ms": 8.205928999984735,
+      "est_oh_ms": 0,
+      "sched_oh_ms": 0,
+      "dist": null
+    },
+    {
+      "label": "TGS (ours)",
+      "test_acc": 0.8009999990463257,
+      "sparsity": 0.6510989010989011,
+      "total_s": 10.342532790999599,
+      "ep_mean_ms": 34.475109303332,
+      "ep_std_ms": 1.7455571893927913,
+      "peak_mb": 0.131208,
+      "flops_red": 0.5484564860426929,
+      "total_flops": 366066688,
+      "inf_ms": 7.218837499976871,
+      "est_oh_ms": 3.46359268666428,
+      "sched_oh_ms": 1.392858909998722,
+      "dist": 0.06873
+    },
+    {
+      "label": "Static (degree-prune)",
+      "test_acc": 0.7260000109672546,
+      "sparsity": 0.6510989010989011,
+      "total_s": 8.322875616999795,
+      "ep_mean_ms": 27.74291872333265,
+      "ep_std_ms": 1.3833800937772558,
+      "peak_mb": 0.077374,
+      "flops_red": 0.0,
+      "total_flops": 282854400,
+      "inf_ms": 7.528015500014362,
+      "est_oh_ms": 0,
+      "sched_oh_ms": 0,
+      "dist": null
+    }
+  ]
+}

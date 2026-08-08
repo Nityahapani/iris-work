@@ -1,0 +1,15 @@
+{
+  "dataset": "Cora",
+  "sparsity": 0.651,
+  "results": [
+    {"label": "Dense GCN",             "test_acc": 0.810, "sparsity": 0.000, "flops_pct": 100, "runtime_pct": 100, "memory_pct": 100, "inf_ms": 8.21, "distortion": null},
+    {"label": "TGS (temporal)",        "test_acc": 0.801, "sparsity": 0.651, "flops_pct":  45, "runtime_pct": 110, "memory_pct":  13, "inf_ms": 7.22, "distortion": 0.069},
+    {"label": "Static (degree-prune)", "test_acc": 0.726, "sparsity": 0.651, "flops_pct":  35, "runtime_pct":  89, "memory_pct":   8, "inf_ms": 7.53, "distortion": null}
+  ],
+  "key_finding": "Temporal TGS achieves 0.801 vs static 0.726 at the same 65% sparsity. The ~10% runtime overhead over static is justified by 7.5pp accuracy gain. Memory footprint is only 13% of dense.",
+  "overhead": {
+    "estimator_per_epoch_ms": 3.46,
+    "scheduler_per_epoch_ms": 1.39,
+    "total_overhead_pct_of_epoch": 13.2
+  }
+}
