@@ -142,9 +142,17 @@ class GradientNormEstimator:
         )
 
     def update_influence(self, active_mask: Tensor) -> None:
-        """Update gradient EMA and maturity after backward()."""
+        """Update gradient EMA and maturity after backward().
+        For GAT/SAGE where edge_weights may not be in the computation graph,
+        we skip gradient update but still update maturity from structural scores."""
         if self.edge_weights.grad is None:
-            logger.warning("update_influence: grad is None — skipping")
+            # Edge weights not in computation graph (e.g. SAGE ignores them).
+            # Still update maturity from gradient history if available.
+            if len(self._grad_history) >= 5:
+                stacked = torch.stack(self._grad_history, dim=0)
+                grad_var = stacked.var(dim=0)
+                mx_var = grad_var.max().clamp(min=1e-10)
+                self._maturity_score = 1.0 - (grad_var / mx_var)
             return
 
         grad = self.edge_weights.grad.detach().abs()

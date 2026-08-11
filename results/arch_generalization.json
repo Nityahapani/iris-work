@@ -1,0 +1,42 @@
+{
+  "Cora": {
+    "GAT": {
+      "dense": 0.828,
+      "tgs": 0.815,
+      "fresh": 0.759,
+      "sparsity": 0.569,
+      "flops_red": 0.482
+    },
+    "GCN": {
+      "dense": 0.81,
+      "tgs": 0.801,
+      "fresh": 0.73,
+      "sparsity": 0.651,
+      "flops_red": 0.548
+    },
+    "SAGE": {
+      "dense": 0.785,
+      "tgs": 0.785,
+      "fresh": 0.711,
+      "sparsity": 0.569,
+      "flops_red": 0.482
+    }
+  },
+  "CiteSeer": {
+    "GCN": {
+      "dense": 0.717,
+      "tgs": 0.654,
+      "fresh": 0.664,
+      "sparsity": 0.651,
+      "flops_red": 0.548
+    },
+    "GAT": {
+      "dense": 0.703,
+      "tgs": 0.667,
+      "fresh": null,
+      "sparsity": 0.612,
+      "flops_red": 0.517,
+      "note": "fresh_timed_out_on_cpu"
+    }
+  }
+}

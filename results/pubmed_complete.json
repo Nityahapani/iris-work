@@ -1,0 +1,17 @@
+{
+  "TGS": {
+    "test": 0.756,
+    "sparsity": 0.651,
+    "flops_red": 0.549,
+    "fresh_acc": 0.7580000162124634
+  },
+  "Static": {
+    "test": 0.7580000162124634,
+    "sparsity": 0.651,
+    "fresh_acc": 0.7580000162124634
+  },
+  "Dense": {
+    "test": 0.79,
+    "sparsity": 0.0
+  }
+}
