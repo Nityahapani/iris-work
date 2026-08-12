@@ -1,0 +1,59 @@
+{
+  "Cora": {
+    "dense": {
+      "test": 0.81,
+      "sparsity": 0.0,
+      "runtime_pct": 100
+    },
+    "tgs": {
+      "test": 0.801,
+      "sparsity": 0.651,
+      "flops_red": 0.548,
+      "distortion": 0.069,
+      "runtime_pct": 110
+    },
+    "static": {
+      "test": 0.726,
+      "sparsity": 0.651,
+      "runtime_pct": 89
+    }
+  },
+  "CiteSeer": {
+    "dense": {
+      "test": 0.717,
+      "sparsity": 0.0,
+      "runtime_pct": 100
+    },
+    "tgs": {
+      "test": 0.654,
+      "sparsity": 0.651,
+      "flops_red": 0.548,
+      "distortion": 0.059,
+      "runtime_pct": 90
+    },
+    "static": {
+      "test": 0.661,
+      "sparsity": 0.651,
+      "runtime_pct": 82
+    }
+  },
+  "PubMed": {
+    "dense": {
+      "test": 0.79,
+      "sparsity": 0.0,
+      "runtime_pct": 100
+    },
+    "tgs": {
+      "test": 0.767,
+      "sparsity": 0.651,
+      "flops_red": 0.497,
+      "distortion": 0.577,
+      "runtime_pct": 107
+    },
+    "static": {
+      "test": 0.758,
+      "sparsity": 0.651,
+      "runtime_pct": 79
+    }
+  }
+}
