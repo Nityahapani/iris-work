@@ -1,0 +1,10 @@
+{
+  "exp5_order": {
+    "TGS order": 0.8180000185966492,
+    "Random order": 0.8190000057220459,
+    "Reverse order": 0.8140000104904175,
+    "Static (all upfront)": 0.7300000190734863
+  },
+  "tgs_acc": 0.8009999990463257,
+  "n_retired": 6873
+}
