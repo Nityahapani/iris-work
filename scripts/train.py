@@ -13,28 +13,16 @@ from pathlib import Path
 
 import torch
 import torch.nn.functional as F
-from torch_geometric.datasets import Planetoid
-from torch_geometric.transforms import NormalizeFeatures
 
-from tgs.core import TemporalGraph, EdgeManager, JacobianInfluenceEstimator
+from tgs.core import TemporalGraph, EdgeManager
 from tgs.core.influence import GradientNormEstimator
 from tgs.models import TemporalGCN
 from tgs.schedulers import AdaptiveRetirementScheduler, RetirementScheduler
 from tgs.evaluation import Evaluator
 from tgs.evaluation.flops import FLOPsCounter
-from tgs.utils import load_config, setup_logging, set_seed, Config
+from tgs.utils import load_config, setup_logging, set_seed, Config, load_dataset
 
 logger = logging.getLogger(__name__)
-
-
-def load_dataset(cfg: Config, device: torch.device):
-    dataset = Planetoid(
-        root=cfg.dataset_root,
-        name=cfg.dataset,
-        transform=NormalizeFeatures(),
-    )
-    data = dataset[0].to(device)
-    return data, dataset.num_features, dataset.num_classes
 
 
 def build_model(cfg: Config, in_channels: int, out_channels: int) -> TemporalGCN:
@@ -165,6 +153,24 @@ def train(cfg: Config) -> dict:
             step=epoch,
             distortion_bound=scheduler.cumulative_distortion_bound,
         )
+
+        # ---- Inform scheduler's val-accuracy guard ----
+        # RetirementScheduler.update_val_acc() halts further retirement if
+        # smoothed val accuracy drops more than _val_patience_delta below
+        # its running best (see tgs/schedulers/retirement_scheduler.py).
+        # This existed but was never wired up, so it was permanently
+        # dormant — meaning retirement could run away on graphs that
+        # converge slowly, locking in a bad edge set before the model had
+        # learned enough for the influence estimator's judgment to be
+        # trustworthy.
+        scheduler.update_val_acc(metrics["val_acc"])
+
+        # ---- Update disagreement signal ----
+        # Per-edge JSD between endpoint softmax predictions. This gives the
+        # influence estimator a label-based signal that works on graphs where
+        # structural degree variance is low (e.g. Minesweeper grid, deg_cv≈0.07),
+        # and enriches the signal on all graphs post-warmup.
+        influence_est.update_disagreement(eval_logits, active_mask)
 
         # ---- Advance step counter ----
         tg.step()

@@ -1,6 +1,9 @@
-# Cora node classification with adaptive edge retirement
-dataset: Cora
+# Texas (WebKB) node classification with adaptive edge retirement.
+# Small, strongly heterophilous graph (183 nodes) — stress test for TGS
+# against Cora/CiteSeer-style homophilous baselines.
+dataset: Texas
 dataset_root: ./data
+split_idx: 0
 model: gcn
 hidden_channels: 64
 num_layers: 2
@@ -26,6 +29,6 @@ ema_decay: 0.9
 
 log_every: 10
 save_dir: ./results
-run_name: cora_gcn_adaptive
+run_name: texas_gcn_adaptive
 
 seed: 42

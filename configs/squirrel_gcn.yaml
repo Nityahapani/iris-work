@@ -1,6 +1,8 @@
-# Cora node classification with adaptive edge retirement
-dataset: Cora
+# Squirrel (WikipediaNetwork) node classification with adaptive edge retirement.
+# Larger, denser web/social graph (5,201 nodes, ~217k edges), moderate heterophily.
+dataset: Squirrel
 dataset_root: ./data
+split_idx: 0
 model: gcn
 hidden_channels: 64
 num_layers: 2
@@ -26,6 +28,6 @@ ema_decay: 0.9
 
 log_every: 10
 save_dir: ./results
-run_name: cora_gcn_adaptive
+run_name: squirrel_gcn_adaptive
 
 seed: 42

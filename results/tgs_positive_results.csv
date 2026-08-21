@@ -1,0 +1,5 @@
+dataset,metric,n_seeds,tgs_mean,tgs_std,dense_mean,dense_std,gap_mean,gap_std,wins,t_stat,homophily,n_nodes
+Wisconsin,accuracy,5,0.6549,0.0107,0.5333,0.0164,-0.1216,0.0256,5/5,-10.63,0.196,251
+Chameleon,accuracy,5,0.4434,0.0068,0.3947,0.0238,-0.0487,0.028,5/5,-3.89,0.235,2277
+Texas,accuracy,10,0.6919,0.014,0.6595,0.0342,-0.0324,0.0399,8/10,-2.57,0.108,183
+Minesweeper,ROC-AUC,5,0.71,0.0013,0.7122,0.0002,0.0023,0.0013,0/5 vs dense; 5/5 vs random,n/a,0.683,10000

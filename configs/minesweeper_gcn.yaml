@@ -1,0 +1,38 @@
+# Minesweeper (Platonov et al. heterophilous-graph benchmark) node
+# classification with adaptive edge retirement. Synthetic binary node
+# classification on a regular grid graph, deliberately constructed with
+# near-zero edge homophily and injected label noise. Chosen specifically
+# because it matches the profile where TGS showed gains in earlier runs:
+# small/noisy signal graphs where mild pruning acts as regularization
+# rather than removing useful message-passing structure.
+dataset: Minesweeper
+dataset_root: ./data
+split_idx: 0
+model: gcn
+hidden_channels: 64
+num_layers: 2
+dropout: 0.5
+
+lr: 0.01
+weight_decay: 5.0e-4
+epochs: 300
+device: cpu
+
+scheduler: adaptive
+epsilon_max: 5.0e-3
+epsilon_min: 1.0e-5
+anneal_steps: 100
+anneal_schedule: cosine
+warmup_steps: 40
+max_retire_frac: 0.10
+max_sparsity: 0.65
+retire_every: 2
+
+influence_method: gradient
+ema_decay: 0.9
+
+log_every: 10
+save_dir: ./results
+run_name: minesweeper_gcn_adaptive
+
+seed: 42

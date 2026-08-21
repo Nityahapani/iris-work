@@ -87,6 +87,17 @@ def effective_resistance_sparsify(
     m = edge_index.shape[1]
     n_keep = max(1, int(m * (1 - target_sparsity)))
 
+    # Dense SVD of the n x n Laplacian is O(n^3) and becomes intractable
+    # well before n reaches a few thousand nodes. Fall back to random
+    # sampling on larger graphs rather than hanging for a very long time.
+    MAX_NODES_FOR_DENSE_SVD = 3500
+    if num_nodes > MAX_NODES_FOR_DENSE_SVD:
+        logger.info(
+            f"eff_resistance: n={num_nodes} exceeds dense-SVD budget "
+            f"({MAX_NODES_FOR_DENSE_SVD}); falling back to random sparsify"
+        )
+        return random_sparsify(edge_index, target_sparsity, seed)
+
     try:
         # Build Laplacian
         L = _build_laplacian(edge_index, num_nodes)

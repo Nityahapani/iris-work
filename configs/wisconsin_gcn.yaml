@@ -1,6 +1,8 @@
-# Cora node classification with adaptive edge retirement
-dataset: Cora
+# Wisconsin (WebKB) node classification with adaptive edge retirement.
+# Small, strongly heterophilous graph (251 nodes).
+dataset: Wisconsin
 dataset_root: ./data
+split_idx: 0
 model: gcn
 hidden_channels: 64
 num_layers: 2
@@ -26,6 +28,6 @@ ema_decay: 0.9
 
 log_every: 10
 save_dir: ./results
-run_name: cora_gcn_adaptive
+run_name: wisconsin_gcn_adaptive
 
 seed: 42

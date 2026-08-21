@@ -10,6 +10,7 @@ class Config:
     # Dataset
     dataset: str = "Cora"
     dataset_root: str = "./data"
+    split_idx: int = 0                   # which geom-gcn split (0-9) for multi-split datasets
 
     # Model
     model: str = "gcn"

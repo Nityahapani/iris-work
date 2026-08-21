@@ -106,6 +106,18 @@ class GradientNormEstimator:
         self._grad_history: list[Tensor] = []
         self._maturity_score: Tensor = torch.zeros(num_edges, device=device)
 
+        # Predicted-label disagreement score (updated from model logits each epoch).
+        # High disagreement = edge crosses a predicted class boundary = retire first.
+        # This signal works on graphs where structural degree signal is blind
+        # (e.g. grid graphs with near-uniform degree like Minesweeper) and on
+        # any graph where heterophilous edges are not concentrated at high-degree
+        # nodes. Stored as a [num_edges] tensor, 0 before first update.
+        self._disagreement_score: Tensor = torch.zeros(num_edges, device=device)
+        self._disagreement_weight: float = 0.5  # blend with structural score post-warmup
+        self._src: Optional[Tensor] = None
+        self._dst: Optional[Tensor] = None
+        self._deg_cv: float = 1.0  # updated in _compute_structural_scores
+
         if edge_index is not None and num_nodes > 0:
             self._compute_structural_scores(edge_index, num_nodes)
 
@@ -136,9 +148,17 @@ class GradientNormEstimator:
         mx_er = er.max().clamp(min=1.0)
         self._er_proxy_score = (er / mx_er)
 
+        # Store edge endpoints for disagreement scoring
+        self._src = edge_index[0].to(self.device)
+        self._dst = edge_index[1].to(self.device)
+
+        # Degree CV — used to detect uniform-degree graphs where structural
+        # signal is near-blind (CV < 0.2 indicates grid-like structure)
+        self._deg_cv = float((deg.std() / deg.mean().clamp(min=1e-8)).item())
+
         logger.debug(
             f"Structural scores: retire_mean={self._struct_retire_score.mean():.3f} "
-            f"er_mean={self._er_proxy_score.mean():.3f}"
+            f"er_mean={self._er_proxy_score.mean():.3f} deg_cv={self._deg_cv:.3f}"
         )
 
     def update_influence(self, active_mask: Tensor) -> None:
@@ -241,9 +261,83 @@ class GradientNormEstimator:
         # Maturity discounts danger: stable edge → lower score → retire sooner
         final   = boosted / (1.0 + self.gamma * maturity_norm)
 
+        # ---- Disagreement blending ----
+        # Per-edge predicted-label JSD enriches retirement decisions with
+        # label-boundary information. High disagreement = edge crosses a
+        # predicted class boundary = safe to retire.
+        #
+        # We ADD disagreement as a bonus discount (reduces final score,
+        # making edge easier to retire) rather than replacing the structural
+        # signal. This preserves the full structural signal on graphs where
+        # it works well (Wisconsin, Chameleon) while helping on graphs where
+        # structural signal is blind (Minesweeper, deg_cv≈0.07).
+        #
+        # Blend strength adapts to structural reliability:
+        #   - deg_cv < 0.2 (grid-like, structural signal near-uniform):
+        #       disagreement dominates (w=0.85) since deg_product is blind
+        #   - deg_cv >= 0.5 (hub structure, structural signal reliable):
+        #       disagreement adds a modest boost (w=0.25)
+        if self._disagreement_score.abs().max() > 1e-8:
+            disagree_norm = _norm(self._disagreement_score, eligible)
+            # High disagreement = retire sooner = LOWER score
+            # Additive discount: final *= (1 - w * disagree_norm)
+            deg_cv = getattr(self, '_deg_cv', 1.0)
+            if deg_cv < 0.2:
+                w_disagree = 0.85
+            elif deg_cv < 0.5:
+                w_disagree = 0.85 - 0.60 * (deg_cv - 0.2) / 0.3
+            else:
+                w_disagree = 0.25
+            final = final * (1.0 - w_disagree * disagree_norm)
+
         scores[eligible] = final[eligible]
         scores[~active_mask] = 0.0
         return scores
+
+    def update_disagreement(self, logits: Tensor, active_mask: Tensor) -> None:
+        """
+        Compute per-edge predicted-label disagreement from current model logits.
+
+        For each active edge (u, v):
+            disagreement(u,v) = JSD(softmax(logits_u), softmax(logits_v))
+
+        where JSD is the Jensen-Shannon divergence — symmetric, bounded [0, log2].
+        High JSD = endpoints predict different classes = edge is cross-class
+        in the model's current view = candidate for retirement.
+
+        This signal is crucial on graphs where structural degree variance is low
+        (deg_cv < 0.2, e.g. Minesweeper's regular grid) because the primary
+        structural score (deg_product) is near-uniform and provides no
+        discriminative power. It also helps on large moderately-heterophilous
+        graphs (Tolokers, Questions) where not all heterophilous edges cluster
+        at high-degree nodes.
+
+        Called every epoch after the model eval forward pass (no gradient needed).
+        Uses EMA to smooth across epochs (same decay as gradient EMA).
+        """
+        if self._src is None or logits is None:
+            return
+
+        with torch.no_grad():
+            probs = torch.softmax(logits.detach(), dim=-1)           # [n, C]
+            p_u = probs[self._src]                                    # [m, C]
+            p_v = probs[self._dst]                                    # [m, C]
+            m = 0.5 * (p_u + p_v)                                    # mixture
+            eps = 1e-10
+            # JSD = 0.5 * KL(p||m) + 0.5 * KL(q||m), bounded [0, log 2]
+            kl_u = (p_u * (p_u.clamp(min=eps).log() - m.clamp(min=eps).log())).sum(-1)
+            kl_v = (p_v * (p_v.clamp(min=eps).log() - m.clamp(min=eps).log())).sum(-1)
+            jsd  = 0.5 * kl_u + 0.5 * kl_v                          # [m]
+
+            # Normalise to [0, 1]
+            mx = jsd.max().clamp(min=1e-10)
+            jsd_norm = jsd / mx
+
+            # EMA smoothing — only update active edges
+            self._disagreement_score[active_mask] = (
+                self._ema_decay * self._disagreement_score[active_mask]
+                + (1 - self._ema_decay) * jsd_norm[active_mask]
+            )
 
     def reset(self) -> None:
         self._ema_influence.zero_()

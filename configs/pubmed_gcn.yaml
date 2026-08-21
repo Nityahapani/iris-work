@@ -6,7 +6,7 @@ num_layers: 2
 dropout: 0.5
 
 lr: 0.01
-weight_decay: 5e-4
+weight_decay: 5.0e-4
 epochs: 300
 device: cpu
 
