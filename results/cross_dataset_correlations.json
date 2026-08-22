@@ -1,0 +1,46 @@
+[
+  {
+    "metric": "hub_cross_frac",
+    "pearson_r": -0.716
+  },
+  {
+    "metric": "dp_gini",
+    "pearson_r": -0.7046
+  },
+  {
+    "metric": "homophily",
+    "pearson_r": 0.68
+  },
+  {
+    "metric": "cross_edge_frac",
+    "pearson_r": -0.68
+  },
+  {
+    "metric": "feature_separation",
+    "pearson_r": -0.2752
+  },
+  {
+    "metric": "deg_gini",
+    "pearson_r": -0.1423
+  },
+  {
+    "metric": "dp_cv",
+    "pearson_r": 0.0998
+  },
+  {
+    "metric": "assortativity",
+    "pearson_r": -0.0951
+  },
+  {
+    "metric": "hub_edge_frac",
+    "pearson_r": 0.0945
+  },
+  {
+    "metric": "hub_label_diversity",
+    "pearson_r": -0.0528
+  },
+  {
+    "metric": "deg_cv",
+    "pearson_r": 0.0014
+  }
+]
