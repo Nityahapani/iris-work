@@ -1,0 +1,374 @@
+{
+  "original": {
+    "description": "Control: unmodified Wisconsin",
+    "prediction": "TGS wins (gap < 0)",
+    "fingerprint": {
+      "m": 515,
+      "homophily": 0.196,
+      "hub_cross_frac": 0.846,
+      "deg_cv": 1.009
+    },
+    "runs": [
+      {
+        "tgs_acc": 0.6667,
+        "dense_acc": 0.5294,
+        "random_acc": 0.5686,
+        "gap_vs_dense": -0.1373,
+        "gap_vs_random": -0.098,
+        "sparsity": 0.68,
+        "seed": 42,
+        "time_sec": 7.5
+      },
+      {
+        "tgs_acc": 0.6667,
+        "dense_acc": 0.5098,
+        "random_acc": 0.6078,
+        "gap_vs_dense": -0.1569,
+        "gap_vs_random": -0.0588,
+        "sparsity": 0.68,
+        "seed": 43,
+        "time_sec": 5.5
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.549,
+        "random_acc": 0.6471,
+        "gap_vs_dense": -0.098,
+        "gap_vs_random": 0.0,
+        "sparsity": 0.68,
+        "seed": 44,
+        "time_sec": 5.7
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.549,
+        "random_acc": 0.5686,
+        "gap_vs_dense": -0.098,
+        "gap_vs_random": -0.0784,
+        "sparsity": 0.68,
+        "seed": 45,
+        "time_sec": 5.5
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.5294,
+        "random_acc": 0.6275,
+        "gap_vs_dense": -0.1176,
+        "gap_vs_random": -0.0196,
+        "sparsity": 0.68,
+        "seed": 46,
+        "time_sec": 5.4
+      }
+    ]
+  },
+  "cross_to_hubs": {
+    "description": "Cross-class edges \u2192 hubs (amplify mechanism)",
+    "prediction": "TGS advantage INCREASES (gap more negative)",
+    "fingerprint": {
+      "m": 932,
+      "homophily": 0.178,
+      "hub_cross_frac": 0.843,
+      "deg_cv": 2.14
+    },
+    "runs": [
+      {
+        "tgs_acc": 0.6667,
+        "dense_acc": 0.6078,
+        "random_acc": 0.6275,
+        "gap_vs_dense": -0.0588,
+        "gap_vs_random": -0.0392,
+        "sparsity": 0.68,
+        "seed": 42,
+        "time_sec": 5.4
+      },
+      {
+        "tgs_acc": 0.6667,
+        "dense_acc": 0.6078,
+        "random_acc": 0.549,
+        "gap_vs_dense": -0.0588,
+        "gap_vs_random": -0.1176,
+        "sparsity": 0.68,
+        "seed": 43,
+        "time_sec": 5.5
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.5882,
+        "random_acc": 0.5882,
+        "gap_vs_dense": -0.0588,
+        "gap_vs_random": -0.0588,
+        "sparsity": 0.68,
+        "seed": 44,
+        "time_sec": 5.6
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.5686,
+        "random_acc": 0.4706,
+        "gap_vs_dense": -0.0784,
+        "gap_vs_random": -0.1765,
+        "sparsity": 0.68,
+        "seed": 45,
+        "time_sec": 5.6
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.6078,
+        "random_acc": 0.5686,
+        "gap_vs_dense": -0.0392,
+        "gap_vs_random": -0.0784,
+        "sparsity": 0.68,
+        "seed": 46,
+        "time_sec": 5.8
+      }
+    ]
+  },
+  "cross_to_non_hubs": {
+    "description": "Cross-class edges \u2192 non-hubs (remove mechanism)",
+    "prediction": "TGS advantage COLLAPSES (gap near 0 or positive)",
+    "fingerprint": {
+      "m": 932,
+      "homophily": 0.159,
+      "hub_cross_frac": 0.815,
+      "deg_cv": 2.14
+    },
+    "runs": [
+      {
+        "tgs_acc": 0.6667,
+        "dense_acc": 0.6471,
+        "random_acc": 0.5686,
+        "gap_vs_dense": -0.0196,
+        "gap_vs_random": -0.098,
+        "sparsity": 0.68,
+        "seed": 42,
+        "time_sec": 5.5
+      },
+      {
+        "tgs_acc": 0.6667,
+        "dense_acc": 0.6078,
+        "random_acc": 0.6078,
+        "gap_vs_dense": -0.0588,
+        "gap_vs_random": -0.0588,
+        "sparsity": 0.68,
+        "seed": 43,
+        "time_sec": 5.5
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.6078,
+        "random_acc": 0.6078,
+        "gap_vs_dense": -0.0392,
+        "gap_vs_random": -0.0392,
+        "sparsity": 0.68,
+        "seed": 44,
+        "time_sec": 5.6
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.6078,
+        "random_acc": 0.5882,
+        "gap_vs_dense": -0.0392,
+        "gap_vs_random": -0.0588,
+        "sparsity": 0.68,
+        "seed": 45,
+        "time_sec": 5.6
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.6667,
+        "random_acc": 0.6275,
+        "gap_vs_dense": 0.0196,
+        "gap_vs_random": -0.0196,
+        "sparsity": 0.68,
+        "seed": 46,
+        "time_sec": 5.7
+      }
+    ]
+  },
+  "same_to_hubs": {
+    "description": "Same-class edges \u2192 hubs (flip hub content)",
+    "prediction": "TGS advantage DECREASES (useful signal at hubs, not noise)",
+    "fingerprint": {
+      "m": 932,
+      "homophily": 0.152,
+      "hub_cross_frac": 0.818,
+      "deg_cv": 2.14
+    },
+    "runs": [
+      {
+        "tgs_acc": 0.6667,
+        "dense_acc": 0.6275,
+        "random_acc": 0.5686,
+        "gap_vs_dense": -0.0392,
+        "gap_vs_random": -0.098,
+        "sparsity": 0.68,
+        "seed": 42,
+        "time_sec": 5.9
+      },
+      {
+        "tgs_acc": 0.6667,
+        "dense_acc": 0.5882,
+        "random_acc": 0.5882,
+        "gap_vs_dense": -0.0784,
+        "gap_vs_random": -0.0784,
+        "sparsity": 0.68,
+        "seed": 43,
+        "time_sec": 5.7
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.6471,
+        "random_acc": 0.4706,
+        "gap_vs_dense": 0.0,
+        "gap_vs_random": -0.1765,
+        "sparsity": 0.68,
+        "seed": 44,
+        "time_sec": 5.4
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.6078,
+        "random_acc": 0.549,
+        "gap_vs_dense": -0.0392,
+        "gap_vs_random": -0.098,
+        "sparsity": 0.68,
+        "seed": 45,
+        "time_sec": 5.4
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.5882,
+        "random_acc": 0.6078,
+        "gap_vs_dense": -0.0588,
+        "gap_vs_random": -0.0392,
+        "sparsity": 0.68,
+        "seed": 46,
+        "time_sec": 5.5
+      }
+    ]
+  },
+  "label_shuffle": {
+    "description": "Shuffle class labels (destroy label structure)",
+    "prediction": "TGS advantage DISAPPEARS (no label structure to exploit)",
+    "fingerprint": {
+      "m": 515,
+      "homophily": 0.322,
+      "hub_cross_frac": 0.667,
+      "deg_cv": 1.009
+    },
+    "runs": [
+      {
+        "tgs_acc": 0.6667,
+        "dense_acc": 0.5098,
+        "random_acc": 0.5294,
+        "gap_vs_dense": -0.1569,
+        "gap_vs_random": -0.1373,
+        "sparsity": 0.68,
+        "seed": 42,
+        "time_sec": 5.5
+      },
+      {
+        "tgs_acc": 0.6667,
+        "dense_acc": 0.4902,
+        "random_acc": 0.5098,
+        "gap_vs_dense": -0.1765,
+        "gap_vs_random": -0.1569,
+        "sparsity": 0.68,
+        "seed": 43,
+        "time_sec": 5.4
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.4902,
+        "random_acc": 0.5294,
+        "gap_vs_dense": -0.1569,
+        "gap_vs_random": -0.1176,
+        "sparsity": 0.68,
+        "seed": 44,
+        "time_sec": 5.6
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.5294,
+        "random_acc": 0.5294,
+        "gap_vs_dense": -0.1176,
+        "gap_vs_random": -0.1176,
+        "sparsity": 0.68,
+        "seed": 45,
+        "time_sec": 5.3
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.4902,
+        "random_acc": 0.5294,
+        "gap_vs_dense": -0.1569,
+        "gap_vs_random": -0.1176,
+        "sparsity": 0.68,
+        "seed": 46,
+        "time_sec": 5.3
+      }
+    ]
+  },
+  "random_rewire": {
+    "description": "Random degree-preserving rewire",
+    "prediction": "TGS advantage DECREASES (hub-cross concentration reduced)",
+    "fingerprint": {
+      "m": 932,
+      "homophily": 0.24,
+      "hub_cross_frac": 0.762,
+      "deg_cv": 2.14
+    },
+    "runs": [
+      {
+        "tgs_acc": 0.6667,
+        "dense_acc": 0.5686,
+        "random_acc": 0.6078,
+        "gap_vs_dense": -0.098,
+        "gap_vs_random": -0.0588,
+        "sparsity": 0.68,
+        "seed": 42,
+        "time_sec": 5.4
+      },
+      {
+        "tgs_acc": 0.6667,
+        "dense_acc": 0.549,
+        "random_acc": 0.4902,
+        "gap_vs_dense": -0.1176,
+        "gap_vs_random": -0.1765,
+        "sparsity": 0.68,
+        "seed": 43,
+        "time_sec": 5.7
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.549,
+        "random_acc": 0.6667,
+        "gap_vs_dense": -0.098,
+        "gap_vs_random": 0.0196,
+        "sparsity": 0.68,
+        "seed": 44,
+        "time_sec": 5.6
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.6078,
+        "random_acc": 0.5686,
+        "gap_vs_dense": -0.0392,
+        "gap_vs_random": -0.0784,
+        "sparsity": 0.68,
+        "seed": 45,
+        "time_sec": 5.6
+      },
+      {
+        "tgs_acc": 0.6471,
+        "dense_acc": 0.5686,
+        "random_acc": 0.4902,
+        "gap_vs_dense": -0.0784,
+        "gap_vs_random": -0.1569,
+        "sparsity": 0.68,
+        "seed": 46,
+        "time_sec": 5.6
+      }
+    ]
+  }
+}
