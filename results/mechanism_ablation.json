@@ -1,0 +1,122 @@
+{
+  "configs": [
+    "LOW-1",
+    "LOW-2",
+    "LOW-3",
+    "LOW-4",
+    "HIGH-1",
+    "HIGH-2",
+    "HIGH-3",
+    "HIGH-4"
+  ],
+  "methods": [
+    "A_static_er",
+    "B_static_inf",
+    "C_random_temp",
+    "D_reverse_temp",
+    "E_tgs",
+    "F_oracle_temp"
+  ],
+  "method_labels": {
+    "A_static_er": "A. Static ER",
+    "B_static_inf": "B. Static Influence",
+    "C_random_temp": "C. Random Temporal",
+    "D_reverse_temp": "D. Reverse Temporal",
+    "E_tgs": "E. TGS",
+    "F_oracle_temp": "F. Oracle Temporal"
+  },
+  "aggregated": [
+    {
+      "label": "LOW-1",
+      "score": 0.03389436693940266,
+      "A_static_er": 0.375,
+      "B_static_inf": 0.3697916641831398,
+      "C_random_temp": 0.4114583358168602,
+      "D_reverse_temp": 0.397569440305233,
+      "E_tgs": 0.4010416641831398,
+      "F_oracle_temp": 0.4201388880610466
+    },
+    {
+      "label": "LOW-2",
+      "score": 0.042763415931331705,
+      "A_static_er": 0.3854166716337204,
+      "B_static_inf": 0.3784722238779068,
+      "C_random_temp": 0.3854166641831398,
+      "D_reverse_temp": 0.3749999925494194,
+      "E_tgs": 0.3697916641831398,
+      "F_oracle_temp": 0.3958333283662796
+    },
+    {
+      "label": "LOW-3",
+      "score": 0.0571223692284919,
+      "A_static_er": 0.3819444477558136,
+      "B_static_inf": 0.4062500074505806,
+      "C_random_temp": 0.3975694477558136,
+      "D_reverse_temp": 0.3663194477558136,
+      "E_tgs": 0.3715277761220932,
+      "F_oracle_temp": 0.390625
+    },
+    {
+      "label": "LOW-4",
+      "score": 0.05954963197489553,
+      "A_static_er": 0.381944440305233,
+      "B_static_inf": 0.3715277761220932,
+      "C_random_temp": 0.390625,
+      "D_reverse_temp": 0.3663194552063942,
+      "E_tgs": 0.3715277686715126,
+      "F_oracle_temp": 0.4027777835726738
+    },
+    {
+      "label": "HIGH-1",
+      "score": 0.23858668544653858,
+      "A_static_er": 0.6944444328546524,
+      "B_static_inf": 0.675347238779068,
+      "C_random_temp": 0.9288194477558136,
+      "D_reverse_temp": 0.9288194477558136,
+      "E_tgs": 0.925347238779068,
+      "F_oracle_temp": 0.9288194477558136
+    },
+    {
+      "label": "HIGH-2",
+      "score": 0.312581291888377,
+      "A_static_er": 0.8541666567325592,
+      "B_static_inf": 0.8211805671453476,
+      "C_random_temp": 0.9895833432674408,
+      "D_reverse_temp": 0.9895833432674408,
+      "E_tgs": 0.9913194626569748,
+      "F_oracle_temp": 0.9895833432674408
+    },
+    {
+      "label": "HIGH-3",
+      "score": 0.4227574247927747,
+      "A_static_er": 0.9357638955116272,
+      "B_static_inf": 0.9166666865348816,
+      "C_random_temp": 0.9965277761220932,
+      "D_reverse_temp": 0.9965277761220932,
+      "E_tgs": 0.9947916716337204,
+      "F_oracle_temp": 0.9965277761220932
+    },
+    {
+      "label": "HIGH-4",
+      "score": 0.48467383980445833,
+      "A_static_er": 0.9427083432674408,
+      "B_static_inf": 0.920138880610466,
+      "C_random_temp": 0.9947916716337204,
+      "D_reverse_temp": 0.9947916716337204,
+      "E_tgs": 0.9947916716337204,
+      "F_oracle_temp": 0.9947916716337204
+    }
+  ],
+  "low_score_configs": [
+    "LOW-1",
+    "LOW-2",
+    "LOW-3",
+    "LOW-4"
+  ],
+  "high_score_configs": [
+    "HIGH-1",
+    "HIGH-2",
+    "HIGH-3",
+    "HIGH-4"
+  ]
+}

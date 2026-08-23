@@ -1,0 +1,261 @@
+{
+  "results": [
+    {
+      "predictor": "homophily",
+      "calib_accuracy": 0.95,
+      "held_accuracy": 0.9666666666666667,
+      "held_bal_acc": 0.9666666666666667,
+      "held_mcc": 0.9354143466934853,
+      "held_metrics": {
+        "acc": 0.9666666666666667,
+        "bal_acc": 0.9666666666666667,
+        "mcc": 0.9354143466934853,
+        "prec": 0.9375,
+        "rec": 1.0,
+        "spec": 0.9333333333333333,
+        "TP": 15,
+        "FP": 1,
+        "FN": 0,
+        "TN": 14
+      }
+    },
+    {
+      "predictor": "deg_cv",
+      "calib_accuracy": 0.95,
+      "held_accuracy": 0.9666666666666667,
+      "held_bal_acc": 0.9666666666666667,
+      "held_mcc": 0.9354143466934853,
+      "held_metrics": {
+        "acc": 0.9666666666666667,
+        "bal_acc": 0.9666666666666667,
+        "mcc": 0.9354143466934853,
+        "prec": 0.9375,
+        "rec": 1.0,
+        "spec": 0.9333333333333333,
+        "TP": 15,
+        "FP": 1,
+        "FN": 0,
+        "TN": 14
+      }
+    },
+    {
+      "predictor": "density",
+      "calib_accuracy": 0.9,
+      "held_accuracy": 0.6,
+      "held_bal_acc": 0.6,
+      "held_mcc": 0.2364331218717302,
+      "held_metrics": {
+        "acc": 0.6,
+        "bal_acc": 0.6,
+        "mcc": 0.2364331218717302,
+        "prec": 0.5652173913043478,
+        "rec": 0.8666666666666667,
+        "spec": 0.3333333333333333,
+        "TP": 13,
+        "FP": 10,
+        "FN": 2,
+        "TN": 5
+      }
+    },
+    {
+      "predictor": "mean_degree",
+      "calib_accuracy": 0.9,
+      "held_accuracy": 0.6,
+      "held_bal_acc": 0.6,
+      "held_mcc": 0.2364331218717302,
+      "held_metrics": {
+        "acc": 0.6,
+        "bal_acc": 0.6,
+        "mcc": 0.2364331218717302,
+        "prec": 0.5652173913043478,
+        "rec": 0.8666666666666667,
+        "spec": 0.3333333333333333,
+        "TP": 13,
+        "FP": 10,
+        "FN": 2,
+        "TN": 5
+      }
+    },
+    {
+      "predictor": "log_n",
+      "calib_accuracy": 0.55,
+      "held_accuracy": 0.5,
+      "held_bal_acc": 0.5,
+      "held_mcc": NaN,
+      "held_metrics": {
+        "acc": 0.5,
+        "bal_acc": 0.5,
+        "mcc": NaN,
+        "prec": 0.5,
+        "rec": 1.0,
+        "spec": 0.0,
+        "TP": 15,
+        "FP": 15,
+        "FN": 0,
+        "TN": 0
+      }
+    },
+    {
+      "predictor": "clustering",
+      "calib_accuracy": 1.0,
+      "held_accuracy": 0.6666666666666666,
+      "held_bal_acc": 0.6666666666666666,
+      "held_mcc": 0.4472135954999579,
+      "held_metrics": {
+        "acc": 0.6666666666666666,
+        "bal_acc": 0.6666666666666666,
+        "mcc": 0.4472135954999579,
+        "prec": 0.6,
+        "rec": 1.0,
+        "spec": 0.3333333333333333,
+        "TP": 15,
+        "FP": 10,
+        "FN": 0,
+        "TN": 5
+      }
+    },
+    {
+      "predictor": "assortativity",
+      "calib_accuracy": 0.85,
+      "held_accuracy": 0.9,
+      "held_bal_acc": 0.9,
+      "held_mcc": 0.816496580927726,
+      "held_metrics": {
+        "acc": 0.9,
+        "bal_acc": 0.9,
+        "mcc": 0.816496580927726,
+        "prec": 1.0,
+        "rec": 0.8,
+        "spec": 1.0,
+        "TP": 12,
+        "FP": 0,
+        "FN": 3,
+        "TN": 15
+      }
+    },
+    {
+      "predictor": "spectral_gap",
+      "calib_accuracy": 0.95,
+      "held_accuracy": 0.9333333333333333,
+      "held_bal_acc": 0.9333333333333333,
+      "held_mcc": 0.8744746321952062,
+      "held_metrics": {
+        "acc": 0.9333333333333333,
+        "bal_acc": 0.9333333333333333,
+        "mcc": 0.8744746321952062,
+        "prec": 0.8823529411764706,
+        "rec": 1.0,
+        "spec": 0.8666666666666667,
+        "TP": 15,
+        "FP": 2,
+        "FN": 0,
+        "TN": 13
+      }
+    },
+    {
+      "predictor": "er_mean",
+      "calib_accuracy": 0.9,
+      "held_accuracy": 0.7333333333333333,
+      "held_bal_acc": 0.7333333333333333,
+      "held_mcc": 0.4666666666666667,
+      "held_metrics": {
+        "acc": 0.7333333333333333,
+        "bal_acc": 0.7333333333333333,
+        "mcc": 0.4666666666666667,
+        "prec": 0.7333333333333333,
+        "rec": 0.7333333333333333,
+        "spec": 0.7333333333333333,
+        "TP": 11,
+        "FP": 4,
+        "FN": 4,
+        "TN": 11
+      }
+    },
+    {
+      "predictor": "H_plus_CV",
+      "calib_accuracy": 0.95,
+      "held_accuracy": 0.9666666666666667,
+      "held_bal_acc": 0.9666666666666667,
+      "held_mcc": 0.9354143466934853,
+      "held_metrics": {
+        "acc": 0.9666666666666667,
+        "bal_acc": 0.9666666666666667,
+        "mcc": 0.9354143466934853,
+        "prec": 0.9375,
+        "rec": 1.0,
+        "spec": 0.9333333333333333,
+        "TP": 15,
+        "FP": 1,
+        "FN": 0,
+        "TN": 14
+      }
+    },
+    {
+      "predictor": "H_times_CV",
+      "calib_accuracy": 0.95,
+      "held_accuracy": 0.9666666666666667,
+      "held_bal_acc": 0.9666666666666667,
+      "held_mcc": 0.9354143466934853,
+      "held_metrics": {
+        "acc": 0.9666666666666667,
+        "bal_acc": 0.9666666666666667,
+        "mcc": 0.9354143466934853,
+        "prec": 0.9375,
+        "rec": 1.0,
+        "spec": 0.9333333333333333,
+        "TP": 15,
+        "FP": 1,
+        "FN": 0,
+        "TN": 14
+      }
+    },
+    {
+      "predictor": "rf_all",
+      "calib_accuracy": 1.0,
+      "held_accuracy": 0.8,
+      "held_bal_acc": 0.8,
+      "held_mcc": 0.6546536707079772,
+      "held_metrics": {
+        "acc": 0.8,
+        "bal_acc": 0.8,
+        "mcc": 0.6546536707079772,
+        "prec": 0.7142857142857143,
+        "rec": 1.0,
+        "spec": 0.6,
+        "TP": 15,
+        "FP": 6,
+        "FN": 0,
+        "TN": 9
+      }
+    }
+  ],
+  "ranking": [
+    "homophily",
+    "deg_cv",
+    "log_n",
+    "H_plus_CV",
+    "H_times_CV",
+    "spectral_gap",
+    "assortativity",
+    "rf_all",
+    "er_mean",
+    "clustering",
+    "density",
+    "mean_degree"
+  ],
+  "our_rule_rank": 5,
+  "rf_feature_importances": {
+    "homophily": 0.1769012786155643,
+    "deg_cv": 0.18542429792429793,
+    "density": 0.09845471599673282,
+    "mean_degree": 0.0522328280185423,
+    "log_n": 0.0,
+    "clustering": 0.28427080855652287,
+    "assortativity": 0.005834641548927264,
+    "spectral_gap": 0.1543442932728647,
+    "er_mean": 0.042537136066547826
+  },
+  "outcome_margin_pp": 3.0,
+  "n_calib": 20,
+  "n_held": 30
+}
