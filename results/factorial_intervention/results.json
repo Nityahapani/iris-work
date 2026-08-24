@@ -1,0 +1,480 @@
+{
+  "Wisconsin": {
+    "cell_A": {
+      "label": "LOW cross  \u00d7 LOW hub",
+      "target": {
+        "h": 0.5,
+        "hub_cross": 0.2
+      },
+      "achieved": {
+        "h": 0.129,
+        "hub_cross": 0.755
+      },
+      "runs": [
+        {
+          "tgs": 0.6667,
+          "dense": 0.6667,
+          "random": 0.5686,
+          "gap": 0.0,
+          "sparsity": 0.68,
+          "seed": 42,
+          "time_sec": 6.9
+        },
+        {
+          "tgs": 0.6667,
+          "dense": 0.6471,
+          "random": 0.6275,
+          "gap": -0.0196,
+          "sparsity": 0.68,
+          "seed": 43,
+          "time_sec": 4.7
+        },
+        {
+          "tgs": 0.6471,
+          "dense": 0.6667,
+          "random": 0.5882,
+          "gap": 0.0196,
+          "sparsity": 0.68,
+          "seed": 44,
+          "time_sec": 4.6
+        },
+        {
+          "tgs": 0.6471,
+          "dense": 0.6471,
+          "random": 0.6078,
+          "gap": 0.0,
+          "sparsity": 0.68,
+          "seed": 45,
+          "time_sec": 4.6
+        },
+        {
+          "tgs": 0.6471,
+          "dense": 0.6667,
+          "random": 0.549,
+          "gap": 0.0196,
+          "sparsity": 0.68,
+          "seed": 46,
+          "time_sec": 4.7
+        }
+      ]
+    },
+    "cell_B": {
+      "label": "LOW cross  \u00d7 HIGH hub",
+      "target": {
+        "h": 0.5,
+        "hub_cross": 0.8
+      },
+      "achieved": {
+        "h": 0.0,
+        "hub_cross": 1.0
+      },
+      "runs": [
+        {
+          "tgs": 0.6667,
+          "dense": 0.6863,
+          "random": 0.5686,
+          "gap": 0.0196,
+          "sparsity": 0.68,
+          "seed": 42,
+          "time_sec": 4.1
+        },
+        {
+          "tgs": 0.6667,
+          "dense": 0.6667,
+          "random": 0.5686,
+          "gap": 0.0,
+          "sparsity": 0.68,
+          "seed": 43,
+          "time_sec": 4.1
+        },
+        {
+          "tgs": 0.6471,
+          "dense": 0.6863,
+          "random": 0.5294,
+          "gap": 0.0392,
+          "sparsity": 0.68,
+          "seed": 44,
+          "time_sec": 4.2
+        },
+        {
+          "tgs": 0.6471,
+          "dense": 0.5882,
+          "random": 0.5098,
+          "gap": -0.0588,
+          "sparsity": 0.68,
+          "seed": 45,
+          "time_sec": 4.1
+        },
+        {
+          "tgs": 0.6471,
+          "dense": 0.6667,
+          "random": 0.5098,
+          "gap": 0.0196,
+          "sparsity": 0.68,
+          "seed": 46,
+          "time_sec": 4.0
+        }
+      ]
+    },
+    "cell_C": {
+      "label": "HIGH cross \u00d7 LOW hub",
+      "target": {
+        "h": 0.2,
+        "hub_cross": 0.2
+      },
+      "achieved": {
+        "h": 0.131,
+        "hub_cross": 0.752
+      },
+      "runs": [
+        {
+          "tgs": 0.6667,
+          "dense": 0.6471,
+          "random": 0.5686,
+          "gap": -0.0196,
+          "sparsity": 0.68,
+          "seed": 42,
+          "time_sec": 4.2
+        },
+        {
+          "tgs": 0.6667,
+          "dense": 0.6471,
+          "random": 0.6078,
+          "gap": -0.0196,
+          "sparsity": 0.68,
+          "seed": 43,
+          "time_sec": 4.2
+        },
+        {
+          "tgs": 0.6471,
+          "dense": 0.6471,
+          "random": 0.6471,
+          "gap": 0.0,
+          "sparsity": 0.68,
+          "seed": 44,
+          "time_sec": 4.2
+        },
+        {
+          "tgs": 0.6471,
+          "dense": 0.6471,
+          "random": 0.5294,
+          "gap": 0.0,
+          "sparsity": 0.68,
+          "seed": 45,
+          "time_sec": 4.4
+        },
+        {
+          "tgs": 0.6471,
+          "dense": 0.6667,
+          "random": 0.6078,
+          "gap": 0.0196,
+          "sparsity": 0.68,
+          "seed": 46,
+          "time_sec": 4.3
+        }
+      ]
+    },
+    "cell_D": {
+      "label": "HIGH cross \u00d7 HIGH hub",
+      "target": {
+        "h": 0.2,
+        "hub_cross": 0.8
+      },
+      "achieved": {
+        "h": 0.206,
+        "hub_cross": 0.83
+      },
+      "runs": [
+        {
+          "tgs": 0.6667,
+          "dense": 0.5882,
+          "random": 0.6275,
+          "gap": -0.0784,
+          "sparsity": 0.68,
+          "seed": 42,
+          "time_sec": 4.2
+        },
+        {
+          "tgs": 0.6667,
+          "dense": 0.5882,
+          "random": 0.5686,
+          "gap": -0.0784,
+          "sparsity": 0.68,
+          "seed": 43,
+          "time_sec": 4.2
+        },
+        {
+          "tgs": 0.6471,
+          "dense": 0.5882,
+          "random": 0.5882,
+          "gap": -0.0588,
+          "sparsity": 0.68,
+          "seed": 44,
+          "time_sec": 4.2
+        },
+        {
+          "tgs": 0.6471,
+          "dense": 0.5686,
+          "random": 0.4902,
+          "gap": -0.0784,
+          "sparsity": 0.68,
+          "seed": 45,
+          "time_sec": 4.1
+        },
+        {
+          "tgs": 0.6471,
+          "dense": 0.5882,
+          "random": 0.6471,
+          "gap": -0.0588,
+          "sparsity": 0.68,
+          "seed": 46,
+          "time_sec": 4.5
+        }
+      ]
+    },
+    "factorial": {
+      "beta_cross": -0.0412,
+      "beta_hub": -0.0333,
+      "beta_int": -0.0666
+    }
+  },
+  "Texas": {
+    "cell_A": {
+      "label": "LOW cross  \u00d7 LOW hub",
+      "target": {
+        "h": 0.5,
+        "hub_cross": 0.2
+      },
+      "achieved": {
+        "h": 0.081,
+        "hub_cross": 0.864
+      },
+      "runs": [
+        {
+          "tgs": 0.6757,
+          "dense": 0.6757,
+          "random": 0.5946,
+          "gap": 0.0,
+          "sparsity": 0.56,
+          "seed": 42,
+          "time_sec": 3.8
+        },
+        {
+          "tgs": 0.7027,
+          "dense": 0.6216,
+          "random": 0.6486,
+          "gap": -0.0811,
+          "sparsity": 0.674,
+          "seed": 43,
+          "time_sec": 3.7
+        },
+        {
+          "tgs": 0.7027,
+          "dense": 0.7027,
+          "random": 0.6486,
+          "gap": -0.0,
+          "sparsity": 0.674,
+          "seed": 44,
+          "time_sec": 3.8
+        },
+        {
+          "tgs": 0.6757,
+          "dense": 0.6757,
+          "random": 0.5946,
+          "gap": 0.0,
+          "sparsity": 0.674,
+          "seed": 45,
+          "time_sec": 3.7
+        },
+        {
+          "tgs": 0.6757,
+          "dense": 0.6757,
+          "random": 0.5676,
+          "gap": 0.0,
+          "sparsity": 0.56,
+          "seed": 46,
+          "time_sec": 3.5
+        }
+      ]
+    },
+    "cell_B": {
+      "label": "LOW cross  \u00d7 HIGH hub",
+      "target": {
+        "h": 0.5,
+        "hub_cross": 0.8
+      },
+      "achieved": {
+        "h": 0.0,
+        "hub_cross": 1.0
+      },
+      "runs": [
+        {
+          "tgs": 0.6757,
+          "dense": 0.6216,
+          "random": 0.5676,
+          "gap": -0.0541,
+          "sparsity": 0.56,
+          "seed": 42,
+          "time_sec": 3.8
+        },
+        {
+          "tgs": 0.7027,
+          "dense": 0.6216,
+          "random": 0.5676,
+          "gap": -0.0811,
+          "sparsity": 0.674,
+          "seed": 43,
+          "time_sec": 3.8
+        },
+        {
+          "tgs": 0.7027,
+          "dense": 0.6216,
+          "random": 0.6216,
+          "gap": -0.0811,
+          "sparsity": 0.674,
+          "seed": 44,
+          "time_sec": 3.6
+        },
+        {
+          "tgs": 0.6757,
+          "dense": 0.6486,
+          "random": 0.5405,
+          "gap": -0.027,
+          "sparsity": 0.674,
+          "seed": 45,
+          "time_sec": 3.6
+        },
+        {
+          "tgs": 0.6757,
+          "dense": 0.6216,
+          "random": 0.5676,
+          "gap": -0.0541,
+          "sparsity": 0.56,
+          "seed": 46,
+          "time_sec": 3.7
+        }
+      ]
+    },
+    "cell_C": {
+      "label": "HIGH cross \u00d7 LOW hub",
+      "target": {
+        "h": 0.2,
+        "hub_cross": 0.2
+      },
+      "achieved": {
+        "h": 0.085,
+        "hub_cross": 0.858
+      },
+      "runs": [
+        {
+          "tgs": 0.6757,
+          "dense": 0.6486,
+          "random": 0.5405,
+          "gap": -0.027,
+          "sparsity": 0.56,
+          "seed": 42,
+          "time_sec": 3.7
+        },
+        {
+          "tgs": 0.7027,
+          "dense": 0.6216,
+          "random": 0.6757,
+          "gap": -0.0811,
+          "sparsity": 0.674,
+          "seed": 43,
+          "time_sec": 3.7
+        },
+        {
+          "tgs": 0.7027,
+          "dense": 0.6216,
+          "random": 0.6216,
+          "gap": -0.0811,
+          "sparsity": 0.674,
+          "seed": 44,
+          "time_sec": 3.6
+        },
+        {
+          "tgs": 0.6757,
+          "dense": 0.6486,
+          "random": 0.6486,
+          "gap": -0.027,
+          "sparsity": 0.674,
+          "seed": 45,
+          "time_sec": 3.6
+        },
+        {
+          "tgs": 0.6757,
+          "dense": 0.6486,
+          "random": 0.4595,
+          "gap": -0.027,
+          "sparsity": 0.56,
+          "seed": 46,
+          "time_sec": 3.6
+        }
+      ]
+    },
+    "cell_D": {
+      "label": "HIGH cross \u00d7 HIGH hub",
+      "target": {
+        "h": 0.2,
+        "hub_cross": 0.8
+      },
+      "achieved": {
+        "h": 0.0,
+        "hub_cross": 1.0
+      },
+      "runs": [
+        {
+          "tgs": 0.6757,
+          "dense": 0.7027,
+          "random": 0.6486,
+          "gap": 0.027,
+          "sparsity": 0.56,
+          "seed": 42,
+          "time_sec": 3.7
+        },
+        {
+          "tgs": 0.7027,
+          "dense": 0.6757,
+          "random": 0.6216,
+          "gap": -0.027,
+          "sparsity": 0.674,
+          "seed": 43,
+          "time_sec": 3.8
+        },
+        {
+          "tgs": 0.7027,
+          "dense": 0.7027,
+          "random": 0.6757,
+          "gap": -0.0,
+          "sparsity": 0.674,
+          "seed": 44,
+          "time_sec": 3.6
+        },
+        {
+          "tgs": 0.6757,
+          "dense": 0.6486,
+          "random": 0.6486,
+          "gap": -0.027,
+          "sparsity": 0.674,
+          "seed": 45,
+          "time_sec": 3.6
+        },
+        {
+          "tgs": 0.6757,
+          "dense": 0.7027,
+          "random": 0.6216,
+          "gap": 0.027,
+          "sparsity": 0.56,
+          "seed": 46,
+          "time_sec": 3.7
+        }
+      ]
+    },
+    "factorial": {
+      "beta_cross": 0.0135,
+      "beta_hub": 0.0027,
+      "beta_int": 0.0919
+    }
+  }
+}
