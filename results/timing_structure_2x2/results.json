@@ -1,0 +1,231 @@
+{
+  "benign": {
+    "label": "LOW cross  \u00d7 LOW hub",
+    "target_h": 0.5,
+    "target_hcf": 0.2,
+    "achieved_h": 0.122,
+    "achieved_hcf": 0.767,
+    "fingerprint": {
+      "h": 0.122,
+      "hcf": 0.767
+    },
+    "early": {
+      "runs": [
+        {
+          "tgs_acc": 0.5686,
+          "dense_acc": 0.6471,
+          "gap": 0.0784,
+          "sparsity": 0.682,
+          "warmup": 0,
+          "seed": 42,
+          "time_sec": 6.7
+        },
+        {
+          "tgs_acc": 0.5098,
+          "dense_acc": 0.6471,
+          "gap": 0.1373,
+          "sparsity": 0.609,
+          "warmup": 0,
+          "seed": 43,
+          "time_sec": 5.0
+        },
+        {
+          "tgs_acc": 0.5294,
+          "dense_acc": 0.6471,
+          "gap": 0.1176,
+          "sparsity": 0.567,
+          "warmup": 0,
+          "seed": 44,
+          "time_sec": 4.9
+        },
+        {
+          "tgs_acc": 0.5294,
+          "dense_acc": 0.6471,
+          "gap": 0.1176,
+          "sparsity": 0.567,
+          "warmup": 0,
+          "seed": 45,
+          "time_sec": 4.9
+        },
+        {
+          "tgs_acc": 0.5294,
+          "dense_acc": 0.6863,
+          "gap": 0.1569,
+          "sparsity": 0.682,
+          "warmup": 0,
+          "seed": 46,
+          "time_sec": 4.8
+        }
+      ]
+    },
+    "late": {
+      "runs": [
+        {
+          "tgs_acc": 0.5294,
+          "dense_acc": 0.6471,
+          "gap": 0.1176,
+          "sparsity": 0.682,
+          "warmup": 40,
+          "seed": 42,
+          "time_sec": 5.0
+        },
+        {
+          "tgs_acc": 0.6471,
+          "dense_acc": 0.6471,
+          "gap": 0.0,
+          "sparsity": 0.567,
+          "warmup": 40,
+          "seed": 43,
+          "time_sec": 4.8
+        },
+        {
+          "tgs_acc": 0.5686,
+          "dense_acc": 0.6471,
+          "gap": 0.0784,
+          "sparsity": 0.567,
+          "warmup": 40,
+          "seed": 44,
+          "time_sec": 4.8
+        },
+        {
+          "tgs_acc": 0.549,
+          "dense_acc": 0.6471,
+          "gap": 0.098,
+          "sparsity": 0.567,
+          "warmup": 40,
+          "seed": 45,
+          "time_sec": 5.0
+        },
+        {
+          "tgs_acc": 0.5686,
+          "dense_acc": 0.6863,
+          "gap": 0.1176,
+          "sparsity": 0.682,
+          "warmup": 40,
+          "seed": 46,
+          "time_sec": 5.0
+        }
+      ]
+    }
+  },
+  "hostile": {
+    "label": "HIGH cross \u00d7 HIGH hub",
+    "target_h": 0.2,
+    "target_hcf": 0.8,
+    "achieved_h": 0.206,
+    "achieved_hcf": 0.83,
+    "fingerprint": {
+      "h": 0.206,
+      "hcf": 0.83
+    },
+    "early": {
+      "runs": [
+        {
+          "tgs_acc": 0.6275,
+          "dense_acc": 0.5882,
+          "gap": -0.0392,
+          "sparsity": 0.682,
+          "warmup": 0,
+          "seed": 42,
+          "time_sec": 5.0
+        },
+        {
+          "tgs_acc": 0.5294,
+          "dense_acc": 0.5882,
+          "gap": 0.0588,
+          "sparsity": 0.567,
+          "warmup": 0,
+          "seed": 43,
+          "time_sec": 4.7
+        },
+        {
+          "tgs_acc": 0.6275,
+          "dense_acc": 0.5882,
+          "gap": -0.0392,
+          "sparsity": 0.682,
+          "warmup": 0,
+          "seed": 44,
+          "time_sec": 4.8
+        },
+        {
+          "tgs_acc": 0.5294,
+          "dense_acc": 0.5686,
+          "gap": 0.0392,
+          "sparsity": 0.567,
+          "warmup": 0,
+          "seed": 45,
+          "time_sec": 5.5
+        },
+        {
+          "tgs_acc": 0.5882,
+          "dense_acc": 0.5882,
+          "gap": 0.0,
+          "sparsity": 0.682,
+          "warmup": 0,
+          "seed": 46,
+          "time_sec": 5.0
+        }
+      ]
+    },
+    "late": {
+      "runs": [
+        {
+          "tgs_acc": 0.6275,
+          "dense_acc": 0.5882,
+          "gap": -0.0392,
+          "sparsity": 0.682,
+          "warmup": 40,
+          "seed": 42,
+          "time_sec": 5.2
+        },
+        {
+          "tgs_acc": 0.5882,
+          "dense_acc": 0.5882,
+          "gap": 0.0,
+          "sparsity": 0.567,
+          "warmup": 40,
+          "seed": 43,
+          "time_sec": 5.4
+        },
+        {
+          "tgs_acc": 0.6471,
+          "dense_acc": 0.5882,
+          "gap": -0.0588,
+          "sparsity": 0.682,
+          "warmup": 40,
+          "seed": 44,
+          "time_sec": 5.3
+        },
+        {
+          "tgs_acc": 0.6275,
+          "dense_acc": 0.5686,
+          "gap": -0.0588,
+          "sparsity": 0.682,
+          "warmup": 40,
+          "seed": 45,
+          "time_sec": 5.2
+        },
+        {
+          "tgs_acc": 0.6471,
+          "dense_acc": 0.5882,
+          "gap": -0.0588,
+          "sparsity": 0.648,
+          "warmup": 40,
+          "seed": 46,
+          "time_sec": 4.9
+        }
+      ]
+    }
+  },
+  "_decomposition": {
+    "beta_T": -0.0431,
+    "beta_S": -0.1215,
+    "beta_TxS": -0.0078,
+    "cell_gaps": {
+      "benign_early": 0.1216,
+      "benign_late": 0.0823,
+      "hostile_early": 0.0039,
+      "hostile_late": -0.0431
+    }
+  }
+}
