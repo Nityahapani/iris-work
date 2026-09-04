@@ -58,8 +58,13 @@ class RetirementScheduler:
         self.max_sparsity = max_sparsity
         self.retire_every = retire_every
 
-        # Cumulative distortion tracker (Corollary 6.5: bound = k * ε)
+        # Cumulative distortion tracker.
+        # Correct bound (Theorem 4.4, additive): Σ I_e(τ(e)) over all retired edges.
+        # Note: the earlier formulation k*ε only holds if every retired edge satisfies
+        # I_e(t) ≤ ε, which is NOT guaranteed by the rank-based retirement rule.
+        # We track actual scores instead. See docs/theory.md § Theory–Implementation Gap.
         self._cumulative_k: int = 0
+        self._cumulative_distortion: float = 0.0
 
         # History for logging
         self._retirement_log: list[dict] = []
@@ -129,8 +134,15 @@ class RetirementScheduler:
             _, order = scores_candidates.sort()
             candidate_idx = candidate_idx[order[:max_retire]]
 
+        # Record actual influence scores at the moment of retirement (before retiring)
+        actual_scores_at_retirement = influence_scores[candidate_idx].detach()
+
         n_retired = self.tg.retire_edges(candidate_idx)
         self._cumulative_k += n_retired
+
+        # Accumulate true distortion: Σ I_e(τ(e)) — valid for any retirement rule
+        # (Theorem 4.4 applied additively). This replaces the invalid k*ε proxy.
+        self._cumulative_distortion += float(actual_scores_at_retirement.sum().item())
 
         entry = {
             "step": t,
@@ -138,7 +150,7 @@ class RetirementScheduler:
             "cumulative_retired": self._cumulative_k,
             "sparsity": self.tg.sparsity,
             "epsilon": self.epsilon,
-            "cumulative_distortion_bound": self._cumulative_k * self.epsilon,
+            "cumulative_distortion_bound": self._cumulative_distortion,
         }
         self._retirement_log.append(entry)
 
@@ -186,11 +198,15 @@ class RetirementScheduler:
     @property
     def cumulative_distortion_bound(self) -> float:
         """
-        Upper bound on cumulative representation distortion from Corollary 6.5:
-            ‖H_t - H_t^{-S}‖_F ≤ k * ε
-        where k = total edges retired so far.
+        Upper bound on cumulative representation distortion (Theorem 4.4, additive):
+            ‖H_t - H_t^{-S}‖_F ≤ Σ_{e ∈ S} I_e(τ(e))
+        where the sum runs over all retired edges at their actual retirement epochs.
+
+        Note: the earlier formulation k*ε was incorrect for the rank-based retirement
+        rule, where retired edges do not necessarily satisfy I_e(t) ≤ ε.
+        See docs/theory.md § Theory–Implementation Gap for full discussion.
         """
-        return self._cumulative_k * self.epsilon
+        return self._cumulative_distortion
 
     @property
     def retirement_log(self) -> list[dict]:
@@ -202,5 +218,8 @@ class RetirementScheduler:
             "warmup_steps": self.warmup_steps,
             "total_retired": self._cumulative_k,
             "final_sparsity": self.tg.sparsity,
+            # Σ I_e(τ(e)) — valid distortion bound for rank-based retirement
             "cumulative_distortion_bound": self.cumulative_distortion_bound,
+            # Legacy proxy (invalid for rank rule): kept for comparison only
+            "cumulative_distortion_keps": self._cumulative_k * self.epsilon,
         }
