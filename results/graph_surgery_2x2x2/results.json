@@ -1,0 +1,439 @@
+{
+  "low_h_low_cv": {
+    "label": "LOW-H \u00d7 LOW-CV  (low noise, uniform deg)",
+    "target_h": 0.2,
+    "target_cv": 0.3,
+    "achieved_h": 0.218,
+    "achieved_cv": 0.797,
+    "m": 257,
+    "early": {
+      "runs": [
+        {
+          "tgs_acc": 0.717,
+          "dense_acc": 0.6981,
+          "gap": -0.0189,
+          "sparsity": 0.679,
+          "warmup": 0,
+          "seed": 42,
+          "time_sec": 1.2
+        },
+        {
+          "tgs_acc": 0.7358,
+          "dense_acc": 0.717,
+          "gap": -0.0189,
+          "sparsity": 0.562,
+          "warmup": 0,
+          "seed": 43,
+          "time_sec": 1.2
+        },
+        {
+          "tgs_acc": 0.7547,
+          "dense_acc": 0.717,
+          "gap": -0.0377,
+          "sparsity": 0.562,
+          "warmup": 0,
+          "seed": 44,
+          "time_sec": 1.2
+        },
+        {
+          "tgs_acc": 0.6981,
+          "dense_acc": 0.717,
+          "gap": 0.0189,
+          "sparsity": 0.562,
+          "warmup": 0,
+          "seed": 45,
+          "time_sec": 1.8
+        },
+        {
+          "tgs_acc": 0.6604,
+          "dense_acc": 0.6981,
+          "gap": 0.0377,
+          "sparsity": 0.562,
+          "warmup": 0,
+          "seed": 46,
+          "time_sec": 1.8
+        }
+      ]
+    },
+    "late": {
+      "runs": [
+        {
+          "tgs_acc": 0.717,
+          "dense_acc": 0.6981,
+          "gap": -0.0189,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 42,
+          "time_sec": 1.3
+        },
+        {
+          "tgs_acc": 0.7547,
+          "dense_acc": 0.717,
+          "gap": -0.0377,
+          "sparsity": 0.679,
+          "warmup": 40,
+          "seed": 43,
+          "time_sec": 1.3
+        },
+        {
+          "tgs_acc": 0.6981,
+          "dense_acc": 0.717,
+          "gap": 0.0189,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 44,
+          "time_sec": 1.2
+        },
+        {
+          "tgs_acc": 0.6792,
+          "dense_acc": 0.717,
+          "gap": 0.0377,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 45,
+          "time_sec": 1.8
+        },
+        {
+          "tgs_acc": 0.6604,
+          "dense_acc": 0.6981,
+          "gap": 0.0377,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 46,
+          "time_sec": 1.9
+        }
+      ]
+    }
+  },
+  "low_h_high_cv": {
+    "label": "LOW-H \u00d7 HIGH-CV (low noise, hub-heavy)  \u2190 TGS regime",
+    "target_h": 0.2,
+    "target_cv": 1.5,
+    "achieved_h": 0.233,
+    "achieved_cv": 1.62,
+    "m": 257,
+    "early": {
+      "runs": [
+        {
+          "tgs_acc": 0.7736,
+          "dense_acc": 0.7736,
+          "gap": -0.0,
+          "sparsity": 0.562,
+          "warmup": 0,
+          "seed": 42,
+          "time_sec": 1.3
+        },
+        {
+          "tgs_acc": 0.8113,
+          "dense_acc": 0.8491,
+          "gap": 0.0377,
+          "sparsity": 0.562,
+          "warmup": 0,
+          "seed": 43,
+          "time_sec": 1.3
+        },
+        {
+          "tgs_acc": 0.8113,
+          "dense_acc": 0.7925,
+          "gap": -0.0189,
+          "sparsity": 0.562,
+          "warmup": 0,
+          "seed": 44,
+          "time_sec": 1.5
+        },
+        {
+          "tgs_acc": 0.7736,
+          "dense_acc": 0.8491,
+          "gap": 0.0755,
+          "sparsity": 0.562,
+          "warmup": 0,
+          "seed": 45,
+          "time_sec": 1.9
+        },
+        {
+          "tgs_acc": 0.8113,
+          "dense_acc": 0.8113,
+          "gap": 0.0,
+          "sparsity": 0.562,
+          "warmup": 0,
+          "seed": 46,
+          "time_sec": 2.1
+        }
+      ]
+    },
+    "late": {
+      "runs": [
+        {
+          "tgs_acc": 0.8113,
+          "dense_acc": 0.7736,
+          "gap": -0.0377,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 42,
+          "time_sec": 1.4
+        },
+        {
+          "tgs_acc": 0.8113,
+          "dense_acc": 0.8491,
+          "gap": 0.0377,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 43,
+          "time_sec": 1.4
+        },
+        {
+          "tgs_acc": 0.8113,
+          "dense_acc": 0.7925,
+          "gap": -0.0189,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 44,
+          "time_sec": 1.4
+        },
+        {
+          "tgs_acc": 0.7547,
+          "dense_acc": 0.8491,
+          "gap": 0.0943,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 45,
+          "time_sec": 1.8
+        },
+        {
+          "tgs_acc": 0.8113,
+          "dense_acc": 0.8113,
+          "gap": 0.0,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 46,
+          "time_sec": 1.9
+        }
+      ]
+    }
+  },
+  "high_h_low_cv": {
+    "label": "HIGH-H \u00d7 LOW-CV (high noise, uniform deg)",
+    "target_h": 0.7,
+    "target_cv": 0.3,
+    "achieved_h": 0.681,
+    "achieved_cv": 0.671,
+    "m": 257,
+    "early": {
+      "runs": [
+        {
+          "tgs_acc": 0.8868,
+          "dense_acc": 0.9057,
+          "gap": 0.0189,
+          "sparsity": 0.679,
+          "warmup": 0,
+          "seed": 42,
+          "time_sec": 1.3
+        },
+        {
+          "tgs_acc": 0.9057,
+          "dense_acc": 0.8868,
+          "gap": -0.0189,
+          "sparsity": 0.562,
+          "warmup": 0,
+          "seed": 43,
+          "time_sec": 1.4
+        },
+        {
+          "tgs_acc": 0.8868,
+          "dense_acc": 0.8491,
+          "gap": -0.0377,
+          "sparsity": 0.562,
+          "warmup": 0,
+          "seed": 44,
+          "time_sec": 1.2
+        },
+        {
+          "tgs_acc": 0.8679,
+          "dense_acc": 0.8679,
+          "gap": -0.0,
+          "sparsity": 0.679,
+          "warmup": 0,
+          "seed": 45,
+          "time_sec": 1.8
+        },
+        {
+          "tgs_acc": 0.8679,
+          "dense_acc": 0.8868,
+          "gap": 0.0189,
+          "sparsity": 0.679,
+          "warmup": 0,
+          "seed": 46,
+          "time_sec": 1.8
+        }
+      ]
+    },
+    "late": {
+      "runs": [
+        {
+          "tgs_acc": 0.9057,
+          "dense_acc": 0.9057,
+          "gap": 0.0,
+          "sparsity": 0.679,
+          "warmup": 40,
+          "seed": 42,
+          "time_sec": 1.4
+        },
+        {
+          "tgs_acc": 0.8679,
+          "dense_acc": 0.8868,
+          "gap": 0.0189,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 43,
+          "time_sec": 1.2
+        },
+        {
+          "tgs_acc": 0.8679,
+          "dense_acc": 0.8491,
+          "gap": -0.0189,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 44,
+          "time_sec": 1.5
+        },
+        {
+          "tgs_acc": 0.8679,
+          "dense_acc": 0.8679,
+          "gap": -0.0,
+          "sparsity": 0.679,
+          "warmup": 40,
+          "seed": 45,
+          "time_sec": 1.7
+        },
+        {
+          "tgs_acc": 0.8679,
+          "dense_acc": 0.8868,
+          "gap": 0.0189,
+          "sparsity": 0.679,
+          "warmup": 40,
+          "seed": 46,
+          "time_sec": 1.8
+        }
+      ]
+    }
+  },
+  "high_h_high_cv": {
+    "label": "HIGH-H \u00d7 HIGH-CV(high noise, hub-heavy)",
+    "target_h": 0.7,
+    "target_cv": 1.5,
+    "achieved_h": 0.708,
+    "achieved_cv": 1.235,
+    "m": 257,
+    "early": {
+      "runs": [
+        {
+          "tgs_acc": 0.9434,
+          "dense_acc": 0.9811,
+          "gap": 0.0377,
+          "sparsity": 0.679,
+          "warmup": 0,
+          "seed": 42,
+          "time_sec": 1.3
+        },
+        {
+          "tgs_acc": 0.9811,
+          "dense_acc": 0.9811,
+          "gap": 0.0,
+          "sparsity": 0.679,
+          "warmup": 0,
+          "seed": 43,
+          "time_sec": 1.2
+        },
+        {
+          "tgs_acc": 0.9057,
+          "dense_acc": 0.9434,
+          "gap": 0.0377,
+          "sparsity": 0.679,
+          "warmup": 0,
+          "seed": 44,
+          "time_sec": 1.3
+        },
+        {
+          "tgs_acc": 0.9623,
+          "dense_acc": 0.9245,
+          "gap": -0.0377,
+          "sparsity": 0.679,
+          "warmup": 0,
+          "seed": 45,
+          "time_sec": 1.7
+        },
+        {
+          "tgs_acc": 0.9623,
+          "dense_acc": 0.9057,
+          "gap": -0.0566,
+          "sparsity": 0.679,
+          "warmup": 0,
+          "seed": 46,
+          "time_sec": 1.7
+        }
+      ]
+    },
+    "late": {
+      "runs": [
+        {
+          "tgs_acc": 0.9623,
+          "dense_acc": 0.9811,
+          "gap": 0.0189,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 42,
+          "time_sec": 1.2
+        },
+        {
+          "tgs_acc": 0.9811,
+          "dense_acc": 0.9811,
+          "gap": 0.0,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 43,
+          "time_sec": 1.5
+        },
+        {
+          "tgs_acc": 0.9623,
+          "dense_acc": 0.9434,
+          "gap": -0.0189,
+          "sparsity": 0.562,
+          "warmup": 40,
+          "seed": 44,
+          "time_sec": 1.3
+        },
+        {
+          "tgs_acc": 0.9434,
+          "dense_acc": 0.9245,
+          "gap": -0.0189,
+          "sparsity": 0.679,
+          "warmup": 40,
+          "seed": 45,
+          "time_sec": 1.8
+        },
+        {
+          "tgs_acc": 0.9434,
+          "dense_acc": 0.9057,
+          "gap": -0.0377,
+          "sparsity": 0.679,
+          "warmup": 40,
+          "seed": 46,
+          "time_sec": 1.7
+        }
+      ]
+    }
+  },
+  "_analysis": {
+    "timing_benefits": {
+      "low_h_high_cv": 0.0038,
+      "low_h_low_cv": -0.0113,
+      "high_h_high_cv": 0.0075,
+      "high_h_low_cv": -0.0075
+    },
+    "interaction_H": -0.0038,
+    "interaction_CV": 0.0151,
+    "three_way_TxHxCV": 0.0,
+    "predicted_winner": "low_h_high_cv",
+    "design": "2x2x2: H(low/high) x CV(low/high) x T(early/late)"
+  }
+}
