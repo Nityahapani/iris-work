@@ -196,6 +196,16 @@ class RetirementScheduler:
             self._val_acc_guard_triggered = True
 
     @property
+    def retirement_due(self) -> bool:
+        """True on epochs when retirement will be attempted this step.
+        Used by callers to gate expensive per-epoch computations (e.g.
+        update_disagreement) so they only run when the scores will be used."""
+        t = self._step
+        if t < self.warmup_steps:
+            return False
+        return (t - self.warmup_steps) % self.retire_every == 0
+
+    @property
     def cumulative_distortion_bound(self) -> float:
         """
         Upper bound on cumulative representation distortion (Theorem 4.4, additive):
